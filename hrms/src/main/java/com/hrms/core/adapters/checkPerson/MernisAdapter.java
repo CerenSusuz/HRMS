@@ -1,8 +1,8 @@
-package com.hrms.core.adapters.checkPerson.abstracts;
+package com.hrms.core.adapters.checkPerson;
 
 import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
 
-public class Mernis implements CheckPersonService {
+public class MernisAdapter implements CheckPersonService {
 
 	private KPSPublicSoapProxy client = new KPSPublicSoapProxy();
 	

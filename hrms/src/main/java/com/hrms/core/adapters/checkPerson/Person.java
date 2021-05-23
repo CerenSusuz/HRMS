@@ -1,4 +1,4 @@
-package com.hrms.core.adapters.checkPerson.abstracts;
+package com.hrms.core.adapters.checkPerson;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
