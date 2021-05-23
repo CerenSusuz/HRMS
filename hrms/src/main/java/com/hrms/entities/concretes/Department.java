@@ -1,35 +1,25 @@
 package com.hrms.entities.concretes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="departments")
 public class Department {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
 	@Column(name="name")
 	private String name;
-	
-	public Department() {
-		super();
-	}
-	
-	public Department(int id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
 	
 	
 }
