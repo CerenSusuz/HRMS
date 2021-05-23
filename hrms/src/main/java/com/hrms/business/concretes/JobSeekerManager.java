@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.JobSeekerService;
 import com.hrms.core.utilities.results.DataResult;
+import com.hrms.core.utilities.results.Result;
 import com.hrms.core.utilities.results.SuccessDataResult;
+import com.hrms.core.utilities.results.SuccessResult;
 import com.hrms.dataAccess.abstracts.JobSeekerDao;
 import com.hrms.entities.concretes.JobSeeker;
 
@@ -25,7 +27,24 @@ public class JobSeekerManager implements JobSeekerService {
 	@Override
 	public DataResult<List<JobSeeker>> getAll() {
 		return new SuccessDataResult<List<JobSeeker>>
-		(this.jobSeekerDao.findAll(),"JobSeekers listed");	
+		(this.jobSeekerDao.findAll(),"Job Seekers listed");	
+	}
+
+	@Override
+	public Result add(JobSeeker jobSeeker) {
+		this.jobSeekerDao.save(jobSeeker);
+		return new SuccessResult("Job Seeker Add OK");
+	}
+
+	@Override
+	public DataResult<JobSeeker> getByNationalityId(String nationalityId) {
+		JobSeeker jobSeeker = null;
+        for(JobSeeker checkjobSeeker :this.jobSeekerDao.findAll()){
+            if(jobSeeker.getNalionalityId() == nationalityId){
+            	jobSeeker=checkjobSeeker;
+            }
+        }
+        return new SuccessDataResult<JobSeeker>(jobSeeker);
 	}
 
 }

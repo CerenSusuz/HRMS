@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.HrmsStaffService;
 import com.hrms.core.utilities.results.DataResult;
+import com.hrms.core.utilities.results.Result;
 import com.hrms.core.utilities.results.SuccessDataResult;
+import com.hrms.core.utilities.results.SuccessResult;
 import com.hrms.dataAccess.abstracts.HrmsStaffDao;
 import com.hrms.entities.concretes.HrmsStaff;
 
@@ -26,6 +28,11 @@ public class HrmsStaffManager implements HrmsStaffService{
 	public DataResult<List<HrmsStaff>> getAll() {
 		return new SuccessDataResult<List<HrmsStaff>>
 		(this.hrmsStaffDao.findAll(),"HrmsStaffs listed");	
+	}
+
+	@Override
+	public Result confirm() {
+		return new SuccessResult("Hrms Confirm OK");
 	}
 
 }

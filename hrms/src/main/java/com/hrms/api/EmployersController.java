@@ -3,11 +3,13 @@ package com.hrms.api;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.business.abstracts.EmployerService;
 import com.hrms.core.utilities.results.DataResult;
+import com.hrms.core.utilities.results.Result;
 import com.hrms.entities.concretes.Employer;
 
 @RestController
@@ -25,5 +27,10 @@ public class EmployersController {
 	public DataResult<List<Employer>> getAll(){
 		return this.employerService.getAll();
 	}
+	
+    @PostMapping("/add")
+    public Result add(Employer employer){
+        return this.employerService.add(employer);
+    }
 
 }

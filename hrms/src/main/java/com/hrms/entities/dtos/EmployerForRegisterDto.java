@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterForEmployerDto {
+public class EmployerForRegisterDto {
 	private String companyName;
 	private String webAddress;
 	private String email;

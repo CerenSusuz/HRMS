@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterForJobSeekerDto {
+public class JobSeekerForRegisterDto {
     private String firstName;
     private String lastName;
     private String nalionalityId;
