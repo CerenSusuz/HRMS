@@ -2,8 +2,9 @@ package com.hrms.business.abstracts;
 
 import java.util.List;
 
+import com.hrms.core.utilities.results.DataResult;
 import com.hrms.entities.concretes.Employer;
 
 public interface EmployerService {
-	List<Employer> getAll();
+	DataResult<List<Employer>> getAll();
 }

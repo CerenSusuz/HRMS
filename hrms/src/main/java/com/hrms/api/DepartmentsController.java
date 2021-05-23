@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.business.abstracts.DepartmentService;
+import com.hrms.core.utilities.results.DataResult;
 import com.hrms.entities.concretes.Department;
 
 @RestController
@@ -23,7 +24,7 @@ public class DepartmentsController {
 	}
 	
 	@GetMapping("/getall")
-	public List<Department> getAll(){
+	public DataResult<List<Department>> getAll(){
 		return this.departmentService.getAll();
 	}
 

@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.DepartmentService;
+import com.hrms.core.utilities.results.DataResult;
+import com.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.dataAccess.abstracts.DepartmentDao;
 import com.hrms.entities.concretes.Department;
+import com.hrms.entities.concretes.JobSeeker;
 
 @Service
 public class DepartmentManager implements DepartmentService {
@@ -21,8 +24,8 @@ public class DepartmentManager implements DepartmentService {
 	}
 
 	@Override
-	public List<Department> getAll() {
-		return this.departmentDao.findAll();
-	}
+	public DataResult<List<Department>> getAll() {
+		return new SuccessDataResult<List<Department>>
+		(this.departmentDao.findAll(),"Departments listed");		}
 
 }
