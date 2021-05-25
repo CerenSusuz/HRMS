@@ -24,11 +24,6 @@ public class AuthController {
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
-    
-    @PostMapping("/login")
-    public Result login(@RequestBody UserForLoginDto userForLoginDto) {
-        return authService.login(userForLoginDto);
-    }
 
     @PostMapping("/employerRegister")
     public Result registerForEmployer(@RequestBody EmployerForRegisterDto employerForRegisterDto) {

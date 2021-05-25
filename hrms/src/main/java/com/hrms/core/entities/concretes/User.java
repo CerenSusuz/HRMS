@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="users")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +16,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	int userId;
+	int id;
 	
 	@Column(name="status")
 	boolean status;
@@ -27,8 +26,5 @@ public class User {
 	
 	@Column(name="email")
 	String email;
-
-	
-	
 	
 }

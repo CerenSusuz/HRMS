@@ -1,7 +1,6 @@
-package com.hrms.core.adapters.checkPerson;
+package com.hrms.core.adapters.mernis;
 
-import java.rmi.RemoteException;
 
-public interface CheckPersonService {
-	 boolean validate(Person person) throws RemoteException;
+public interface UserCheckService {
+	 boolean validate(String firstName, String lastName,long nationalityId, int birthYear);
 }

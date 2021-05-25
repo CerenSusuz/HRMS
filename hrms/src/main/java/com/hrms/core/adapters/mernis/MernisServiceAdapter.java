@@ -1,33 +1,29 @@
-package com.hrms.core.adapters.checkPerson;
-
-import java.rmi.RemoteException;
+package com.hrms.core.adapters.mernis;
 
 import org.springframework.stereotype.Service;
 
-import tr.gov.nvi.tckimlik.WS.KPSPublicSoap;
-import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
-
 @Service
-public class MernisAdapter implements CheckPersonService {
+public class MernisServiceAdapter implements UserCheckService {
 
 	@Override
-	public boolean validate(Person person) throws RemoteException {
-		System.out.println("sadfghj");
-		return true;
+	public boolean validate(String firstName, String lastName,long nationalityId, int birthYear){
+	return true;
 	}
 
-//	private KPSPublicSoap client = new KPSPublicSoapProxy();
+//	KPSPublicSoapProxy kpsPublicSoapProxy = new KPSPublicSoapProxy();
 //	
-//	public boolean validate(Person person) throws RemoteException {
+//	public boolean validate(String firstName, String lastName,long nationalityId, int birthYear) {
 //		 try {
-//	            return client.TCKimlikNoDogrula(
-//	                    person.getNalionalityId(),
-//	                    person.getFirstName(),
-//	                    person.getLastName(),
-//	                    person.getYearOfBirth());
+//	            return kpsPublicSoapProxy.TCKimlikNoDogrula(
+//	                    nationalityId,
+//	                    firstName,
+//	                    lastName),
+//	                    birthYear);
 //	        } catch (Exception e) {
-//	            return false;
+//	            ex.printStackTrace();
 //	        }
+//	        
+//           return result;
 //	}
 
 }

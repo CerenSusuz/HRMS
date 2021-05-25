@@ -1,7 +1,5 @@
 package com.hrms.business.concretes;
 
-import java.rmi.RemoteException;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +10,8 @@ import com.hrms.business.abstracts.HrmsStaffService;
 import com.hrms.business.abstracts.JobSeekerService;
 import com.hrms.business.abstracts.MailService;
 import com.hrms.business.abstracts.UserService;
-import com.hrms.core.adapters.checkPerson.CheckPersonService;
-import com.hrms.core.adapters.checkPerson.Person;
+import com.hrms.core.adapters.mernis.UserCheckService;
+import com.hrms.core.utilities.business.BusinessRules;
 import com.hrms.core.utilities.results.ErrorResult;
 import com.hrms.core.utilities.results.Result;
 import com.hrms.core.utilities.results.SuccessResult;
@@ -21,83 +19,93 @@ import com.hrms.entities.concretes.Employer;
 import com.hrms.entities.concretes.JobSeeker;
 import com.hrms.entities.dtos.EmployerForRegisterDto;
 import com.hrms.entities.dtos.JobSeekerForRegisterDto;
-import com.hrms.entities.dtos.UserForLoginDto;
 
 @Service
 public class AuthManager implements AuthService{
 
 	private UserService userService;
 	private JobSeekerService jobSeekerService;
-	private EmployerService employerService;
-	private CheckPersonService checkPersonService;
-	private ModelMapper modelMapper;
 	private MailService mailService;
+	private EmployerService employerService;
+	private UserCheckService checkPersonService;
+	private ModelMapper modelMapper;
 	private HrmsStaffService hrmsService;
 	
 	@Autowired
 	public AuthManager(UserService userService, 
 			JobSeekerService jobSeekerService,
-			EmployerService employerService,
-			CheckPersonService checkPersonService,
-			ModelMapper modelMapper,
 			MailService mailService,
+			EmployerService employerService,
+			UserCheckService checkPersonService,
+			ModelMapper modelMapper,
 			HrmsStaffService hrmsService) {
 		super();
 		this.userService = userService;
 		this.jobSeekerService = jobSeekerService;
+		this.mailService = mailService;
 		this.employerService = employerService;
 		this.checkPersonService = checkPersonService;
 		this.modelMapper = modelMapper;
-		this.mailService = mailService;
 		this.hrmsService = hrmsService;
 		
 	}
 
 	@Override
-	public Result login(UserForLoginDto userForLoginDto) {
-		var userToCheck = checkEmail(userForLoginDto.getEmail());
-		if (userToCheck != null) {
-			return new ErrorResult("The user not found.");
-		}
-		return new SuccessResult() ; 
-	}
-
-	@Override
-	public Result employerRegister(EmployerForRegisterDto employerForRegisterDto) {
+	public Result employerRegister(EmployerForRegisterDto employer) {
 		
-		if(checkEmployerRegisterForm(employerForRegisterDto) != null &&
-			checkPasswordSame(employerForRegisterDto.getPassword(), employerForRegisterDto.getRepassword()) != null &&
-			checkMailVerification(employerForRegisterDto.getEmail()) != null &&
-			checkDomain(employerForRegisterDto) != null &&
-			checkHrmsConfirm() != null &&
-			checkEmail(employerForRegisterDto.getEmail()) != null ) {
-			return new ErrorResult("Your registration is NOT completed.");
+		var result = BusinessRules.run(checkEmployerRegisterForm(employer),
+				 checkDomain(employer),
+				 checkEmailVerification(employer.getEmail()),
+				 checkHrmsConfirm(),
+				 checkIfEmailExists(employer.getEmail())
+				);
+		
+		if (result != null) {
+			return result;
 		}
 		
-        Employer employer = modelMapper.map(employerForRegisterDto,Employer.class)  ;
-        this.employerService.add(employer);
+        Employer createEmployer = modelMapper.map(employer,Employer.class)  ;
+        this.employerService.add(createEmployer);
         return new SuccessResult("Your registration is completed.");
 	}
 
 	@Override
-	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeekerForRegisterDto) throws RemoteException {
+	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeeker){
 		
-	    if(checkJobSeekerRegisterForm(jobSeekerForRegisterDto) != null &&
-	        checkMernis(jobSeekerForRegisterDto) != null &&
-	    	checkEmail(jobSeekerForRegisterDto.getEmail()) != null &&
-	    	checkNationalityId(jobSeekerForRegisterDto.getNalionalityId()) != null &&
-	    	checkPasswordSame(jobSeekerForRegisterDto.getPassword(), jobSeekerForRegisterDto.getRepassword()) != null &&
-	    	checkMailVerification(jobSeekerForRegisterDto.getEmail()) != null) {
-	    	return new ErrorResult("Your registration is NOT completed.");
-	    }
-	
-	    JobSeeker jobSeeker = modelMapper.map(jobSeekerForRegisterDto, JobSeeker.class);
-        this.jobSeekerService.add(jobSeeker);
+		var result = BusinessRules.run(checkJobSeekerRegisterForm(jobSeeker),
+				checkMernis(jobSeeker),
+				checkIfEmailExists(jobSeeker.getEmail()),
+				checkNationalityId(jobSeeker.getNalionalityId()),
+				checkPasswordSame(jobSeeker.getPassword(),jobSeeker.getRepassword()),
+				checkEmailVerification(jobSeeker.getEmail())				
+				);
+		if (result != null) {
+			return result;
+		}
+		
+	    JobSeeker creteJobSeeker = modelMapper.map(jobSeeker, JobSeeker.class);
+        this.jobSeekerService.add(creteJobSeeker);
 		return new SuccessResult("Your registration is completed.");
 		
 	}
 	
 	// check rules
+	
+	private Result checkIfEmailExists(String email) {
+		var result = this.userService.findByMail(email);
+		if (result.getData() != null) {
+			return new ErrorResult("e-mail verification could not be performed.");
+		}
+		return new SuccessResult();
+	}
+	
+	private Result checkEmailVerification(String email) {
+		var result = this.mailService.verification(email);
+		if (result != null) {
+			return new ErrorResult("The user is registered.");
+		}
+		return new SuccessResult();
+	}
 	
 	private Result checkPasswordSame(String password, String rePassword) {
 		if (password != rePassword) {
@@ -106,17 +114,6 @@ public class AuthManager implements AuthService{
 		return new SuccessResult();
 	}
 	
-	private Result checkMailVerification(String email) {
-		this.mailService.send(email);
-		return new SuccessResult("OK");
-	}
-	
-	private Result checkEmail(String email) {
-		if(this.userService.getByMail(email) != null){
-			 return new ErrorResult("The user is registered.");
-		}
-		return new SuccessResult() ;
-	}
 	
 	//for jobSeekers
 	
@@ -135,15 +132,19 @@ public class AuthManager implements AuthService{
 		return new SuccessResult();
 	}
 	
-	private Result checkMernis(JobSeekerForRegisterDto jobSeekerForRegisterDto) throws RemoteException {
-		 if(!checkPersonService.validate(modelMapper.map(jobSeekerForRegisterDto, Person.class))){
+	private Result checkMernis(JobSeekerForRegisterDto jobSeekerForRegisterDto) {
+		 if(!checkPersonService.validate(jobSeekerForRegisterDto.getFirstName(),
+				 jobSeekerForRegisterDto.getLastName(),
+				 jobSeekerForRegisterDto.getNalionalityId(),
+				 jobSeekerForRegisterDto.getYearOfBirth())){
 			return new ErrorResult("Identity not verified.");
 		}
 		return new SuccessResult() ;
 	}
 	
 	private Result checkNationalityId(long nationalityId) {
-		if (this.jobSeekerService.getByNationalityId(nationalityId) != null) {
+		var result = this.jobSeekerService.findByNationalityId(nationalityId);
+		if (result.getData() != null) {
 			return new ErrorResult("The user is registered.");
 		}
 		return new SuccessResult() ;

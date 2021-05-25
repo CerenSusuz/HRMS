@@ -37,14 +37,8 @@ public class JobSeekerManager implements JobSeekerService {
 	}
 
 	@Override
-	public DataResult<JobSeeker> getByNationalityId(long nationalityId) {
-		JobSeeker jobSeeker = null;
-        for(JobSeeker checkjobSeeker :this.jobSeekerDao.findAll()){
-            if(jobSeeker.getNalionalityId() == nationalityId){
-            	jobSeeker=checkjobSeeker;
-            }
-        }
-        return new SuccessDataResult<JobSeeker>(jobSeeker);
+	public DataResult<JobSeeker> findByNationalityId(long nationalityId) {
+		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.findByNationalityId(nationalityId));
 	}
 
 }
