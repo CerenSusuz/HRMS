@@ -25,7 +25,7 @@ public class JobSeeker extends User{
 	private String lastName;
 	
 	@Column(name="nalionality_id")
-	private String nalionalityId;
+	private long nalionalityId;
 	
 	@Column(name="year_of_birth")
 	private int yearOfBirth;
@@ -36,7 +36,7 @@ public class JobSeeker extends User{
     		String password, 
     		String firstName,
     		String lastName, 
-    		String nationalityId, 
+    		long nalionalityId, 
     		int yearOfBirth) {
         super(userId, status, email, password);
         this.firstName = firstName;

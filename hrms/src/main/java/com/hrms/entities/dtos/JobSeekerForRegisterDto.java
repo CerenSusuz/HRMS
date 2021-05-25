@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 public class JobSeekerForRegisterDto {
     private String firstName;
     private String lastName;
-    private String nalionalityId;
-    private String yearOfBirth;
+    private long nalionalityId;
+    private int yearOfBirth;
     private String email;
     private String password;
     private String repassword;

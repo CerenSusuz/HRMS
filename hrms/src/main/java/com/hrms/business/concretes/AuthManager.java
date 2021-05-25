@@ -1,5 +1,7 @@
 package com.hrms.business.concretes;
 
+import java.rmi.RemoteException;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,6 @@ import com.hrms.entities.concretes.JobSeeker;
 import com.hrms.entities.dtos.EmployerForRegisterDto;
 import com.hrms.entities.dtos.JobSeekerForRegisterDto;
 import com.hrms.entities.dtos.UserForLoginDto;
-
 
 @Service
 public class AuthManager implements AuthService{
@@ -79,7 +80,7 @@ public class AuthManager implements AuthService{
 	}
 
 	@Override
-	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeekerForRegisterDto) {
+	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeekerForRegisterDto) throws RemoteException {
 		
 	    if(checkJobSeekerRegisterForm(jobSeekerForRegisterDto) != null &&
 	        checkMernis(jobSeekerForRegisterDto) != null &&
@@ -123,8 +124,8 @@ public class AuthManager implements AuthService{
 		
 		if(jobSeekerForRegisterDto.getFirstName() == null &&
 			jobSeekerForRegisterDto.getLastName() == null &&
-			jobSeekerForRegisterDto.getNalionalityId() == null &&
-			jobSeekerForRegisterDto.getYearOfBirth() == null &&
+			jobSeekerForRegisterDto.getNalionalityId() > 0 &&
+			jobSeekerForRegisterDto.getYearOfBirth() > 0 &&
 			jobSeekerForRegisterDto.getEmail() == null &&
 			jobSeekerForRegisterDto.getPassword() == null && 
 			jobSeekerForRegisterDto.getRepassword() == null
@@ -134,14 +135,14 @@ public class AuthManager implements AuthService{
 		return new SuccessResult();
 	}
 	
-	private Result checkMernis(JobSeekerForRegisterDto jobSeekerForRegisterDto) {
+	private Result checkMernis(JobSeekerForRegisterDto jobSeekerForRegisterDto) throws RemoteException {
 		 if(!checkPersonService.validate(modelMapper.map(jobSeekerForRegisterDto, Person.class))){
 			return new ErrorResult("Identity not verified.");
 		}
 		return new SuccessResult() ;
 	}
 	
-	private Result checkNationalityId(String nationalityId) {
+	private Result checkNationalityId(long nationalityId) {
 		if (this.jobSeekerService.getByNationalityId(nationalityId) != null) {
 			return new ErrorResult("The user is registered.");
 		}
