@@ -12,7 +12,6 @@ import com.hrms.business.abstracts.AuthService;
 import com.hrms.core.utilities.results.Result;
 import com.hrms.entities.dtos.EmployerForRegisterDto;
 import com.hrms.entities.dtos.JobSeekerForRegisterDto;
-import com.hrms.entities.dtos.UserForLoginDto;
 
 @RestController
 @RequestMapping("/api/auth")

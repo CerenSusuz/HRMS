@@ -53,7 +53,7 @@ public class AuthManager implements AuthService{
 	@Override
 	public Result employerRegister(EmployerForRegisterDto employer) {
 		
-		var result = BusinessRules.run(checkEmployerRegisterForm(employer),
+		Result result = BusinessRules.run(checkEmployerRegisterForm(employer),
 				 checkDomain(employer),
 				 checkEmailVerification(employer.getEmail()),
 				 checkHrmsConfirm(),
@@ -72,7 +72,7 @@ public class AuthManager implements AuthService{
 	@Override
 	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeeker){
 		
-		var result = BusinessRules.run(checkJobSeekerRegisterForm(jobSeeker),
+		Result result = BusinessRules.run(checkJobSeekerRegisterForm(jobSeeker),
 				checkMernis(jobSeeker),
 				checkIfEmailExists(jobSeeker.getEmail()),
 				checkNationalityId(jobSeeker.getNalionalityId()),
@@ -92,8 +92,8 @@ public class AuthManager implements AuthService{
 	// check rules
 	
 	private Result checkIfEmailExists(String email) {
-		var result = this.userService.findByMail(email);
-		if (result.getData() != null) {
+		Result result = this.userService.findByMail(email);
+		if (result != null) {
 			return new ErrorResult("e-mail verification could not be performed.");
 		}
 		return new SuccessResult();
@@ -143,8 +143,8 @@ public class AuthManager implements AuthService{
 	}
 	
 	private Result checkNationalityId(long nationalityId) {
-		var result = this.jobSeekerService.findByNationalityId(nationalityId);
-		if (result.getData() != null) {
+		Result result = this.jobSeekerService.findByNationalityId(nationalityId);
+		if (result != null) {
 			return new ErrorResult("The user is registered.");
 		}
 		return new SuccessResult() ;

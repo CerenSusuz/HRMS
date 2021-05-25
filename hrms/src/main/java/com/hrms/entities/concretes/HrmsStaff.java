@@ -24,8 +24,8 @@ public class HrmsStaff{
 	@Column(name="last_name")
 	private String lastName;
 	
-	@Column(name="nalionality_id")
-	private String nalionalityId;
+	@Column(name="nationality_id")
+	private String nationalityId;
 
 	@Column(name="user_id")
 	private int userId;

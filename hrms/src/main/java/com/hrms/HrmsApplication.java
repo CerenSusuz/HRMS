@@ -5,6 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.hrms.business.abstracts.MailService;
+import com.hrms.business.concretes.MailManager;
+
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -28,6 +31,11 @@ public class HrmsApplication {
 //    public UserCheckService checkPersonService(){
 //        return new MernisServiceAdapter();
 //    }
+    
+    @Bean
+    public MailService mailService(){
+        return new MailManager();
+    }
     
 	@Bean
     public Docket api() { 

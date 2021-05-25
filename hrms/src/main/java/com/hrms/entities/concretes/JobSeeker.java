@@ -24,8 +24,8 @@ public class JobSeeker{
 	@Column(name="last_name")
 	private String lastName;
 	
-	@Column(name="nalionality_id")
-	private long nalionalityId;
+	@Column(name="nationality_id")
+	private long nationalityId;
 	
 	@Column(name="year_of_birth")
 	private int yearOfBirth;

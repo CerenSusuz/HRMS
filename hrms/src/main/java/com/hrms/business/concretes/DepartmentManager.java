@@ -1,11 +1,13 @@
 package com.hrms.business.concretes;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.DepartmentService;
+import com.hrms.core.utilities.business.BusinessRules;
 import com.hrms.core.utilities.results.DataResult;
 import com.hrms.core.utilities.results.ErrorResult;
 import com.hrms.core.utilities.results.Result;
@@ -32,9 +34,13 @@ public class DepartmentManager implements DepartmentService {
 
 	@Override
 	public Result add(Department department) {
-		if (checkDepartment(department.getName()) != null) {
-			return new ErrorResult("Department add error");
+	
+		Result result = BusinessRules.run(checkDepartment(department.getName()));
+
+		if (result != null) {
+			return result;
 		}
+		
 		this.departmentDao.save(department);
 		return new SuccessResult("Department add ok");
 	}
@@ -42,12 +48,13 @@ public class DepartmentManager implements DepartmentService {
 	//check rules
 	
 	private Result checkDepartment(String name) {
-        for(Department department :this.departmentDao.findAll()){
-            if(department.getName() == name){
-            	return new ErrorResult("This department is already registered.");
-            }
-        }
-        return new SuccessResult();
+		List<Department> list = this.departmentDao.findAll();
+		for (Department department: list) {
+			if (department.getName() == name) {
+				return new ErrorResult("ERROR");
+			}
+		}
+		return new SuccessResult();
 	}
 	
 
