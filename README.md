@@ -19,3 +19,5 @@ Projeyi geliştirirken yararlandığım kaynaklar:
 <a href="https://kodedu.com/2013/10/spring-framework-java-siniflari-ile-konfigurasyon/">@Bean</a>
   
 <a href="https://www.youtube.com/watch?v=YE0dybIeMLQ">Mernis</a>
+
+<a href="https://tugrulbayrak.medium.com/hibernate-1-orm-kavram%C4%B1na-giri%C5%9F-c2ba2f2a3bfe">ORM</a>
