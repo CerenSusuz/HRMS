@@ -92,7 +92,7 @@ public class AuthManager implements AuthService{
 	// check rules
 	
 	private Result checkIfEmailExists(String email) {
-		Result result = this.userService.findByMail(email);
+		Result result = this.userService.getByEmail(email);
 		if (result != null) {
 			return new ErrorResult("e-mail verification could not be performed.");
 		}
@@ -143,7 +143,7 @@ public class AuthManager implements AuthService{
 	}
 	
 	private Result checkNationalityId(long nationalityId) {
-		Result result = this.jobSeekerService.findByNationalityId(nationalityId);
+		Result result = this.jobSeekerService.getByNationalityId(nationalityId);
 		if (result != null) {
 			return new ErrorResult("The user is registered.");
 		}

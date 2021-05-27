@@ -7,5 +7,5 @@ import com.hrms.core.entities.concretes.User;
 
 @Repository
 public interface UserDao extends JpaRepository<User,Integer> {
-	User findByEmail(String email);
+	User getByEmail(String email);
 }

@@ -7,5 +7,5 @@ import com.hrms.entities.concretes.JobSeeker;
 
 @Repository
 public interface JobSeekerDao extends JpaRepository<JobSeeker, Integer>{
-	JobSeeker findByNationalityId(long nationalityId);
+	JobSeeker getByNationalityId(long nationalityId);
 }
