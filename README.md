@@ -16,4 +16,6 @@ Projeyi geliştirirken yararlandığım kaynaklar:
 
 <a href="https://www.baeldung.com/hibernate-identifiers">An Overview of Identifiers in Hibernate/JPA</a>
 
-<a href="https://kodedu.com/2013/10/spring-framework-java-siniflari-ile-konfigurasyon/">@Bean<a/>
+<a href="https://kodedu.com/2013/10/spring-framework-java-siniflari-ile-konfigurasyon/">@Bean</a>
+  
+<a href="https://www.youtube.com/watch?v=YE0dybIeMLQ">Mernis</a>
