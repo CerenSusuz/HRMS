@@ -1,7 +1,9 @@
 # HRMS
-human resourse management software
+Human Resourse Management Software
 
-Proje geliştirilirken yararlanılan kaynaklar:
+<img src="">
+
+Projeyi geliştirirken yararlandığım kaynaklar:
 
 <a href="https://www.btkakademi.gov.tr/portal/course/java-ile-programlamaya-giris-9617#!/about">JAVA İle Programlamaya Giriş</a>
 
