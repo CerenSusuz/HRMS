@@ -72,7 +72,6 @@ public class AuthManager implements AuthService{
 
 	@Override
 	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeeker){
-		System.out.println(jobSeeker.getNationalityId());
 		Result result = BusinessRules.run(
 				//checkJobSeekerRegisterForm(jobSeeker)
 				checkMernis(jobSeeker)
@@ -85,8 +84,8 @@ public class AuthManager implements AuthService{
 		if (result != null) {
 			return result;
 		}
-		System.out.println(jobSeeker.getNationalityId());
-	    JobSeeker creteJobSeeker = modelMapper.map(jobSeeker,JobSeeker.class);
+		
+		JobSeeker creteJobSeeker = modelMapper.map(jobSeeker, JobSeeker.class);
         this.jobSeekerService.add(creteJobSeeker);
 		return new SuccessResult("Your registration is completed.");
 		

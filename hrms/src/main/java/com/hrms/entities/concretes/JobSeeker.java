@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "job_seekers")
+
 public class JobSeeker extends User{
 	
 	@Column(name="first_name")
@@ -28,8 +29,7 @@ public class JobSeeker extends User{
 	@Column(name="year_of_birth")
 	private int yearOfBirth;
 
-	public JobSeeker(String email, String password, boolean status, String firstName, String lastName,
-			String nationalityId, int yearOfBirth) {
+	public JobSeeker(String email, String password, boolean status, String firstName, String lastName, String nationalityId, int yearOfBirth) {
 		super(email, password, status);
 		this.firstName = firstName;
 		this.lastName = lastName;
