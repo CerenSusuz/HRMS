@@ -1,5 +1,7 @@
 package com.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -21,5 +23,6 @@ public class Department {
 	@Column(name="name")
 	private String name;
 	
-	
+	@OneToMany(mappedBy="department")
+	private List<JobAnnouncement> jobAnnouncements;
 }

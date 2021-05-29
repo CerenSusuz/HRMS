@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "job_announcement")
+@Table(name = "job_announcements")
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -45,7 +47,17 @@ public class JobAnnouncement {
 	@Column(name = "release_date")
 	private String releaseDate;
 	
+	@ManyToOne()
+	@JoinColumn(name = "employer_id")
+	private Employer employer;
 	
+	@ManyToOne()
+	@JoinColumn(name = "city_id")
+	private City city;
+	
+	@ManyToOne()
+	@JoinColumn(name="department_id")
+	private Department department;
 	
 	
 }

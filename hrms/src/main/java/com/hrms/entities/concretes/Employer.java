@@ -1,7 +1,10 @@
 package com.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -29,6 +32,8 @@ public class Employer extends User{
 	@Column(name = "phone_number",nullable = false)
 	private String phoneNumber;
 	
+	@OneToMany(mappedBy= "employer")
+	private List<JobAnnouncement> jobAnnouncements;
 
 	public Employer(String email,String password, boolean status, String companyName, String webAddress, String phoneNumber) {
 		super(email,password,status);
