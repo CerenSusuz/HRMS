@@ -8,8 +8,7 @@ public class MailManager implements MailService{
 
 	@Override
 	public Result verification(String email) {
-		System.out.println("Mail checked");
-		return new SuccessResult();
+		return new SuccessResult("Mail checked");
 	}
 
 }

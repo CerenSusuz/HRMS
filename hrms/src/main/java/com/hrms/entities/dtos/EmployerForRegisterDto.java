@@ -8,10 +8,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployerForRegisterDto {
+	
 	private String companyName;
 	private String webAddress;
+    private String phoneNumber;
+    
 	private String email;
-	private String phoneNumber;
 	private String password;
-	private String repassword;
+	private boolean status;
+	
+	private String rePassword;
 }

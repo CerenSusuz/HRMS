@@ -53,32 +53,35 @@ public class AuthManager implements AuthService{
 	@Override
 	public Result employerRegister(EmployerForRegisterDto employer) {
 		
-		Result result = BusinessRules.run(checkEmployerRegisterForm(employer),
+		var result = BusinessRules.run(
+				 checkEmployerRegisterForm(employer),
 				 checkDomain(employer),
 				 checkEmailVerification(employer.getEmail()),
 				 checkHrmsConfirm(),
-				 checkIfEmailExists(employer.getEmail())
+				 checkIfEmailExists(employer.getEmail()),
+				 checkPasswordSame(employer.getPassword(),employer.getRePassword())
 				);
-		
 		if (result != null) {
 			return result;
 		}
 		
-        Employer createEmployer = modelMapper.map(employer,Employer.class)  ;
+        Employer createEmployer = modelMapper.map(employer,Employer.class);
         this.employerService.add(createEmployer);
+        System.out.println(createEmployer);
         return new SuccessResult("Your registration is completed.");
 	}
 
 	@Override
 	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeeker){
 		
-		Result result = BusinessRules.run(checkJobSeekerRegisterForm(jobSeeker),
+		Result result = BusinessRules.run(
 				checkMernis(jobSeeker),
 				checkIfEmailExists(jobSeeker.getEmail()),
-				checkNationalityId(jobSeeker.getNalionalityId()),
-				checkPasswordSame(jobSeeker.getPassword(),jobSeeker.getRepassword()),
+				checkNationalityId(jobSeeker.getNationalityId()),
+				checkPasswordSame(jobSeeker.getPassword(),jobSeeker.getRePassword()),
 				checkEmailVerification(jobSeeker.getEmail())				
 				);
+		
 		if (result != null) {
 			return result;
 		}
@@ -92,50 +95,44 @@ public class AuthManager implements AuthService{
 	// check rules
 	
 	private Result checkIfEmailExists(String email) {
+		
 		Result result = this.userService.getByEmail(email);
-		if (result != null) {
-			return new ErrorResult("e-mail verification could not be performed.");
+		
+		if (result.getMessage() != null) {
+			return new ErrorResult("e-mail already registered");
 		}
 		return new SuccessResult();
 	}
 	
 	private Result checkEmailVerification(String email) {
-		var result = this.mailService.verification(email);
-		if (result != null) {
-			return new ErrorResult("The user is registered.");
+		
+		Result result = this.mailService.verification(email);
+		
+		if (result == null) {
+			return new ErrorResult("email could not be verified");
 		}
+		
 		return new SuccessResult();
 	}
 	
 	private Result checkPasswordSame(String password, String rePassword) {
-		if (password != rePassword) {
+		
+		if (!password.equals(rePassword)) {
 			return new ErrorResult("Passwords are not the same");
 		}
+		
 		return new SuccessResult();
 	}
 	
 	
 	//for jobSeekers
-	
-	private Result checkJobSeekerRegisterForm(JobSeekerForRegisterDto jobSeekerForRegisterDto) {
 		
-		if(jobSeekerForRegisterDto.getFirstName() == null &&
-			jobSeekerForRegisterDto.getLastName() == null &&
-			jobSeekerForRegisterDto.getNalionalityId() > 0 &&
-			jobSeekerForRegisterDto.getYearOfBirth() > 0 &&
-			jobSeekerForRegisterDto.getEmail() == null &&
-			jobSeekerForRegisterDto.getPassword() == null && 
-			jobSeekerForRegisterDto.getRepassword() == null
-				){
-            return new ErrorResult("Please fill out the form, there is missing information.");
-        }
-		return new SuccessResult();
-	}
-	
 	private Result checkMernis(JobSeekerForRegisterDto jobSeekerForRegisterDto) {
-		 if(!checkPersonService.validate(jobSeekerForRegisterDto.getFirstName(),
+		 
+		if(!checkPersonService.validate(
+				 jobSeekerForRegisterDto.getFirstName(),
 				 jobSeekerForRegisterDto.getLastName(),
-				 jobSeekerForRegisterDto.getNalionalityId(),
+				 jobSeekerForRegisterDto.getNationalityId(),
 				 jobSeekerForRegisterDto.getYearOfBirth())){
 			return new ErrorResult("Identity not verified.");
 		}
@@ -143,7 +140,9 @@ public class AuthManager implements AuthService{
 	}
 	
 	private Result checkNationalityId(long nationalityId) {
+		
 		Result result = this.jobSeekerService.getByNationalityId(nationalityId);
+		
 		if (result != null) {
 			return new ErrorResult("The user is registered.");
 		}
@@ -153,25 +152,16 @@ public class AuthManager implements AuthService{
 	//for Employer
 	
 	private Result checkDomain(EmployerForRegisterDto employerForRegisterDto) {
-		String domain = employerForRegisterDto.getEmail().split("@")[1];
-        if(domain.equals(employerForRegisterDto.getWebAddress())){
+		
+		String domain = employerForRegisterDto.getEmail().split("@")[0];
+		
+		if(domain.equals(employerForRegisterDto.getWebAddress())){
         	return new SuccessResult();
         }
+		
         return new ErrorResult("Company Email mismatch.");
 	}
 	
-	private Result checkEmployerRegisterForm(EmployerForRegisterDto employerForRegisterDto) {
-		if(employerForRegisterDto.getCompanyName() == null &&
-			employerForRegisterDto.getWebAddress() == null &&
-			employerForRegisterDto.getPhoneNumber() == null &&
-			employerForRegisterDto.getEmail() == null &&
-			employerForRegisterDto.getPassword() == null &&
-			employerForRegisterDto.getRepassword() == null
-				){
-            return new ErrorResult("Please fill out the form, there is missing information.");
-        }
-		return new SuccessResult();
-	}
 	
 	private Result checkHrmsConfirm() {
 		if(this.hrmsService.confirm() == null) {
@@ -180,6 +170,19 @@ public class AuthManager implements AuthService{
 		return new SuccessResult();
 	}
 	
+	
+	private Result checkEmployerRegisterForm(EmployerForRegisterDto employer) {
+		if(employer.getCompanyName().isBlank() == true ||
+		   employer.getWebAddress().isBlank() == true ||
+			employer.getPhoneNumber().isBlank() == true ||
+			employer.getEmail().isBlank() == true ||
+			employer.getPassword().isBlank() == true ||
+			employer.getRePassword().isBlank() == true
+				){
+            return new ErrorResult("Please fill out the form, there is missing information.");
+        }
+		return new SuccessResult();
+	}
 	
 }
 	

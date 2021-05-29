@@ -1,43 +1,41 @@
 package com.hrms.core.entities.concretes;
 
-import javax.persistence.*;
-
-import com.hrms.entities.concretes.Employer;
-import com.hrms.entities.concretes.HrmsStaff;
-import com.hrms.entities.concretes.JobSeeker;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
 @Data
 @Entity
-@Table(name="users")
-@AllArgsConstructor
+@Table(name = "users")
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	int id;
+	@Column(name = "id")
+	private int id;
 	
-	@Column(name="status")
-	boolean status;
+	@Column(name = "email")
+	private String email;
 	
-	@Column(name="password")
-	String password;
+	@Column(name = "password")
+	private String password;
 	
-	@Column(name="email")
-	String email;
+	@Column(name = "status")
+	private boolean status;
 	
-	@OneToOne(mappedBy = "user")
-	private JobSeeker jobSeeker;
-	
-	@OneToOne(mappedBy = "user")
-	private Employer employer;
-	
-	@OneToOne(mappedBy = "user")
-	private HrmsStaff hrmsStaff;
-	
+	public User(String email, String password, boolean status) {
+		this.email = email;
+		this.password = password;
+		this.status = status;
+	}
 }

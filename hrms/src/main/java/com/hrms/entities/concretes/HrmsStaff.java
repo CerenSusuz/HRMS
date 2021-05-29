@@ -4,21 +4,18 @@ import javax.persistence.*;
 
 import com.hrms.core.entities.concretes.User;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@PrimaryKeyJoinColumn(name="user_id",referencedColumnName = "id")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Table(name="hrms_staffs")
-public class HrmsStaff{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+
+public class HrmsStaff extends User{
 	
 	@Column(name="first_name")
 	private String firstName;
@@ -29,8 +26,12 @@ public class HrmsStaff{
 	@Column(name="nationality_id")
 	private String nationalityId;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User user;
+	public HrmsStaff(String email,String password, boolean status,String firstName, String lastName, String nationalityId) {
+		super(email,password,status);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.nationalityId = nationalityId;
+	}
+	
 	
 }

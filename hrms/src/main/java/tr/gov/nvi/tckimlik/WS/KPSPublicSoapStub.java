@@ -8,9 +8,13 @@
 package tr.gov.nvi.tckimlik.WS;
 
 public class KPSPublicSoapStub extends org.apache.axis.client.Stub implements tr.gov.nvi.tckimlik.WS.KPSPublicSoap {
-    private java.util.Vector cachedSerClasses = new java.util.Vector();
-    private java.util.Vector cachedSerQNames = new java.util.Vector();
+    @SuppressWarnings({ "rawtypes", "unused" })
+	private java.util.Vector cachedSerClasses = new java.util.Vector();
+    @SuppressWarnings({ "rawtypes", "unused" })
+	private java.util.Vector cachedSerQNames = new java.util.Vector();
+    @SuppressWarnings({ "rawtypes", "unused" })
     private java.util.Vector cachedSerFactories = new java.util.Vector();
+    @SuppressWarnings({ "rawtypes", "unused" })
     private java.util.Vector cachedDeserFactories = new java.util.Vector();
 
     static org.apache.axis.description.OperationDesc [] _operations;
@@ -62,7 +66,8 @@ public class KPSPublicSoapStub extends org.apache.axis.client.Stub implements tr
         ((org.apache.axis.client.Service)super.service).setTypeMappingVersion("1.2");
     }
 
-    protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
+    @SuppressWarnings("rawtypes")
+	protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
         try {
             org.apache.axis.client.Call _call = super._createCall();
             if (super.maintainSessionSet) {
@@ -111,7 +116,8 @@ public class KPSPublicSoapStub extends org.apache.axis.client.Stub implements tr
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Long(TCKimlikNo), ad, soyad, new java.lang.Integer(dogumYili)});
+ try {        @SuppressWarnings("deprecation")
+java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Long(TCKimlikNo), ad, soyad, new java.lang.Integer(dogumYili)});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
