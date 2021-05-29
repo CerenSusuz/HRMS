@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.JobSeekerService;
-import com.hrms.core.entities.concretes.User;
 import com.hrms.core.utilities.results.DataResult;
 import com.hrms.core.utilities.results.ErrorDataResult;
 import com.hrms.core.utilities.results.Result;
