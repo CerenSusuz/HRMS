@@ -2,6 +2,8 @@ package com.hrms.entities.concretes;
 
 import javax.persistence.*;
 
+import com.hrms.core.entities.concretes.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,8 +29,9 @@ public class Employer{
 	@Column(name="phone_number")
 	private String phoneNumber;
 	
-	@Column(name="user_id")
-	private int userId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
 
 }
 

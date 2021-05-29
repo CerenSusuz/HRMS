@@ -2,16 +2,20 @@ package com.hrms.entities.concretes;
 
 import javax.persistence.*;
 
+import com.hrms.core.entities.concretes.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="job_seekers")
-public class JobSeeker{
+@Table(name = "job_seekers")
+public class JobSeeker extends User{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +34,9 @@ public class JobSeeker{
 	@Column(name="year_of_birth")
 	private int yearOfBirth;
 	
-	@Column(name="user_id")
-	private int userId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
 
 
 }
