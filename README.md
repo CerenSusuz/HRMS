@@ -21,3 +21,11 @@ Projeyi geliştirirken yararlandığım kaynaklar:
 <a href="https://www.youtube.com/watch?v=YE0dybIeMLQ">Mernis</a>
 
 <a href="https://tugrulbayrak.medium.com/hibernate-1-orm-kavram%C4%B1na-giri%C5%9F-c2ba2f2a3bfe">ORM</a>
+
+<a href="https://blog.burakkutbay.com/hibernate-dersleri-bire-cok-iliski-one-to-many-annotation.html/">One To Many Annotation</a>
+
+<a href="https://oguzhaninan.gitlab.io/Java-Jackson-Annotation-Ek-Aciklamalar/">Java Jackson Annotations</a>
+
+<a href="https://metinalniacik.medium.com/equals-ve-hashcode-metotlar%C4%B1n%C4%B1n-%C3%B6nemi-nedir-800c99af1519">Equals ve HashCode</a>
+
+<a href="https://www.baeldung.com/jpa-one-to-one">One-to-One Relationship in JPA</a>
