@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.JobSeekerService;
+import com.hrms.core.entities.concretes.User;
 import com.hrms.core.utilities.results.DataResult;
+import com.hrms.core.utilities.results.ErrorDataResult;
 import com.hrms.core.utilities.results.Result;
 import com.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.core.utilities.results.SuccessResult;
@@ -38,7 +40,10 @@ public class JobSeekerManager implements JobSeekerService {
 
 	@Override
 	public DataResult<JobSeeker> getByNationalityId(String nationalityId) {
-		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.getByNationalityId(nationalityId));
+		if (this.jobSeekerDao.getByNationalityId(nationalityId) != null) {
+			return new SuccessDataResult<JobSeeker>("User founded");
+		}
+		return new ErrorDataResult<JobSeeker>();
 	}
 
 }

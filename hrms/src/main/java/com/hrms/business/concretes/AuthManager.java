@@ -73,12 +73,12 @@ public class AuthManager implements AuthService{
 	@Override
 	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeeker){
 		Result result = BusinessRules.run(
-				//checkJobSeekerRegisterForm(jobSeeker)
-				checkMernis(jobSeeker)
-				//checkIfEmailExists(jobSeeker.getEmail()),
-				//checkNationalityId(jobSeeker.getNationalityId()),
-				//checkPasswordSame(jobSeeker.getPassword(),jobSeeker.getRePassword()),
-				//checkEmailVerification(jobSeeker.getEmail())				
+				checkJobSeekerRegisterForm(jobSeeker),
+				checkMernis(jobSeeker),
+				checkIfEmailExists(jobSeeker.getEmail()),
+				checkNationalityId(jobSeeker.getNationalityId()),
+				checkPasswordSame(jobSeeker.getPassword(),jobSeeker.getRePassword()),
+				checkEmailVerification(jobSeeker.getEmail())				
 				);
 		
 		if (result != null) {
@@ -141,11 +141,9 @@ public class AuthManager implements AuthService{
 		
 	private Result checkMernis(JobSeekerForRegisterDto jobSeeker) {
 		 
-		if(!checkPersonService.validate(
-				jobSeeker.getFirstName(),
-				jobSeeker.getLastName(),
+		if(checkPersonService.validate(
 				jobSeeker.getNationalityId(),
-				jobSeeker.getYearOfBirth())){
+				jobSeeker.getYearOfBirth())== false) {
 			return new ErrorResult("Identity not verified.");
 		}
 		return new SuccessResult() ;
@@ -155,8 +153,8 @@ public class AuthManager implements AuthService{
 		
 		Result result = this.jobSeekerService.getByNationalityId(nationalityId);
 		
-		if (result != null) {
-			return new ErrorResult("The user is registered.");
+		if (result.getMessage() != null) {
+			return new ErrorResult("User already registered.");
 		}
 		return new SuccessResult() ;
 	}
@@ -173,15 +171,13 @@ public class AuthManager implements AuthService{
 		
         return new ErrorResult("Company Email mismatch.");
 	}
-	
-	
+
 	private Result checkHrmsConfirm() {
 		if(this.hrmsService.confirm() == null) {
 			return new ErrorResult("Your registration has not been approved by our institution.");
 		}
 		return new SuccessResult();
 	}
-	
 	
 	private Result checkEmployerRegisterForm(EmployerForRegisterDto employer) {
 		if(employer.getCompanyName().isBlank() == true ||

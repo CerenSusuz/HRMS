@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.hrms.business.abstracts.MailService;
 import com.hrms.business.concretes.MailManager;
+import com.hrms.core.adapters.mernis.MernisServiceAdapter;
+import com.hrms.core.adapters.mernis.UserCheckService;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -31,10 +33,10 @@ public class HrmsApplication {
         return modelMapper;
     }
 
-//    @Bean
-//    public UserCheckService checkPersonService(){
-//        return new MernisServiceAdapter();
-//    }
+    @Bean
+    public UserCheckService checkPersonService(){
+        return new MernisServiceAdapter();
+    }
     
     @Bean
     public MailService mailService(){
