@@ -47,7 +47,9 @@ public class DepartmentManager implements DepartmentService {
 	//check rules
 	
 	private Result checkDepartment(String name) {
+		
 		var result = this.departmentDao.getByName(name);
+		
 		if (result != null) {
 			return new ErrorResult("Department already added");
 		}
