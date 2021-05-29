@@ -67,26 +67,26 @@ public class AuthManager implements AuthService{
 		
         Employer createEmployer = modelMapper.map(employer,Employer.class);
         this.employerService.add(createEmployer);
-        System.out.println(createEmployer);
         return new SuccessResult("Your registration is completed.");
 	}
 
 	@Override
 	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeeker){
-		
+		System.out.println(jobSeeker.getNationalityId());
 		Result result = BusinessRules.run(
-				checkMernis(jobSeeker),
-				checkIfEmailExists(jobSeeker.getEmail()),
-				checkNationalityId(jobSeeker.getNationalityId()),
-				checkPasswordSame(jobSeeker.getPassword(),jobSeeker.getRePassword()),
-				checkEmailVerification(jobSeeker.getEmail())				
+				//checkJobSeekerRegisterForm(jobSeeker)
+				checkMernis(jobSeeker)
+				//checkIfEmailExists(jobSeeker.getEmail()),
+				//checkNationalityId(jobSeeker.getNationalityId()),
+				//checkPasswordSame(jobSeeker.getPassword(),jobSeeker.getRePassword()),
+				//checkEmailVerification(jobSeeker.getEmail())				
 				);
 		
 		if (result != null) {
 			return result;
 		}
-		
-	    JobSeeker creteJobSeeker = modelMapper.map(jobSeeker, JobSeeker.class);
+		System.out.println(jobSeeker.getNationalityId());
+	    JobSeeker creteJobSeeker = modelMapper.map(jobSeeker,JobSeeker.class);
         this.jobSeekerService.add(creteJobSeeker);
 		return new SuccessResult("Your registration is completed.");
 		
@@ -126,20 +126,33 @@ public class AuthManager implements AuthService{
 	
 	
 	//for jobSeekers
+	
+	private Result checkJobSeekerRegisterForm(JobSeekerForRegisterDto jobSeeker) {
+		if(jobSeeker.getFirstName().isBlank() == true ||
+			jobSeeker.getLastName().isBlank() == true ||
+		    jobSeeker.getNationalityId().isBlank() == true  ||
+			jobSeeker.getEmail().isBlank() == true ||
+			jobSeeker.getPassword().isBlank() == true ||
+			jobSeeker.getRePassword().isBlank() == true
+				){
+            return new ErrorResult("Please fill out the form, there is missing information.");
+        }
+		return new SuccessResult();
+	}
 		
-	private Result checkMernis(JobSeekerForRegisterDto jobSeekerForRegisterDto) {
+	private Result checkMernis(JobSeekerForRegisterDto jobSeeker) {
 		 
 		if(!checkPersonService.validate(
-				 jobSeekerForRegisterDto.getFirstName(),
-				 jobSeekerForRegisterDto.getLastName(),
-				 jobSeekerForRegisterDto.getNationalityId(),
-				 jobSeekerForRegisterDto.getYearOfBirth())){
+				jobSeeker.getFirstName(),
+				jobSeeker.getLastName(),
+				jobSeeker.getNationalityId(),
+				jobSeeker.getYearOfBirth())){
 			return new ErrorResult("Identity not verified.");
 		}
 		return new SuccessResult() ;
 	}
 	
-	private Result checkNationalityId(long nationalityId) {
+	private Result checkNationalityId(String nationalityId) {
 		
 		Result result = this.jobSeekerService.getByNationalityId(nationalityId);
 		

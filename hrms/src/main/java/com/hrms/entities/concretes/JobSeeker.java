@@ -23,13 +23,13 @@ public class JobSeeker extends User{
 	private String lastName;
 	
 	@Column(name="nationality_id")
-	private long nationalityId;
+	private String nationalityId;
 	
 	@Column(name="year_of_birth")
 	private int yearOfBirth;
 
 	public JobSeeker(String email, String password, boolean status, String firstName, String lastName,
-			long nationalityId, int yearOfBirth) {
+			String nationalityId, int yearOfBirth) {
 		super(email, password, status);
 		this.firstName = firstName;
 		this.lastName = lastName;

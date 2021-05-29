@@ -8,6 +8,6 @@ import com.hrms.entities.concretes.JobSeeker;
 
 public interface JobSeekerService {
 	DataResult<List<JobSeeker>> getAll();
-	DataResult<JobSeeker> getByNationalityId(long nationalityId);
+	DataResult<JobSeeker> getByNationalityId(String nationalityId);
 	Result add(JobSeeker jobSeeker);
 }

@@ -11,7 +11,7 @@ public class JobSeekerForRegisterDto {
 	
 	private String firstName;
 	private String lastName;
-	private long nationalityId;
+	private String nationalityId;
 	private int yearOfBirth;
 	
 	private String email;

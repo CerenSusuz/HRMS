@@ -1,7 +1,5 @@
 package com.hrms.api;
 
-import java.rmi.RemoteException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,13 +24,13 @@ public class AuthController {
     }
 
     @PostMapping("/employerRegister")
-    public Result registerForEmployer(@RequestBody EmployerForRegisterDto employerForRegisterDto) {
-        return authService.employerRegister(employerForRegisterDto);
+    public Result registerForEmployer(@RequestBody EmployerForRegisterDto employer) {
+        return authService.employerRegister(employer);
     }
 
     @PostMapping("/jobSeekerRegister")
-    public Result registerForJobSeeker(@RequestParam JobSeekerForRegisterDto jobSeekerForRegisterDto) throws RemoteException {
-        return authService.jobSeekerRegister(jobSeekerForRegisterDto);
+    public Result registerForJobSeeker(@RequestBody JobSeekerForRegisterDto jobSeeker){
+        return authService.jobSeekerRegister(jobSeeker);
     }
 
 }
