@@ -43,18 +43,18 @@ public class DepartmentManager implements DepartmentService {
 		this.departmentDao.save(department);
 		return new SuccessResult("Department add ok");
 	}
-	
+
 	//check rules
 	
 	private Result checkDepartment(String name) {
-		List<Department> list = this.departmentDao.findAll();
-		for (Department department: list) {
-			if (department.getName() == name) {
-				return new ErrorResult("ERROR");
-			}
+		var result = this.departmentDao.getByName(name);
+		if (result != null) {
+			return new ErrorResult("Department already added");
 		}
 		return new SuccessResult();
 	}
+
+
 	
 
 }
