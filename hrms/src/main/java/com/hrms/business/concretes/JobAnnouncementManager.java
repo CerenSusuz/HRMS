@@ -26,13 +26,20 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 
 	@Override
 	public DataResult<List<JobAnnouncement>> getAll() {
-		return new SuccessDataResult<List<JobAnnouncement>>(this.jobAnnouncementDao.findAll());
+		return new SuccessDataResult<List<JobAnnouncement>>
+		(this.jobAnnouncementDao.findAll());
 	}
 
 	@Override
 	public Result add(JobAnnouncement jobAnnouncement) {
 		this.jobAnnouncementDao.save(jobAnnouncement);
 		return new SuccessResult("Job Announcement added ok");
+	}
+
+	@Override
+	public DataResult<List<JobAnnouncement>> getByIsActiveTrue() {
+		return new SuccessDataResult<List<JobAnnouncement>>
+		(this.jobAnnouncementDao.getByIsActiveTrue());
 	}
 
 }
