@@ -1,5 +1,6 @@
 package com.hrms.business.abstracts;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.hrms.core.utilities.results.DataResult;
@@ -12,4 +13,5 @@ public interface JobAnnouncementService {
 	Result add(JobAnnouncement jobAnnouncement);
 	
 	DataResult<List<JobAnnouncement>> getByIsActiveTrue();
+	DataResult<List<JobAnnouncement>> getByApplicationDeadlineLessThanEqual(LocalDate date);
 }

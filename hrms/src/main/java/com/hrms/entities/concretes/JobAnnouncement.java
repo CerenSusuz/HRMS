@@ -43,7 +43,7 @@ public class JobAnnouncement {
 	@Column(name = "open_positions",nullable = false)
 	private int openPositions;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone="CET")
 	@Column(name = "application_deadline",nullable = false)
 	private LocalDate applicationDeadline;
 	
