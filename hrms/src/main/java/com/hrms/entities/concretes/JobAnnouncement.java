@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -43,7 +42,6 @@ public class JobAnnouncement {
 	@Column(name = "open_positions",nullable = false)
 	private int openPositions;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone="CET")
 	@Column(name = "application_deadline",nullable = false)
 	private LocalDate applicationDeadline;
 	

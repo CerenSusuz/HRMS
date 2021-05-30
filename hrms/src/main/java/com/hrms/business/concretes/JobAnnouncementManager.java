@@ -50,4 +50,12 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 		(this.jobAnnouncementDao.getByApplicationDeadlineLessThanEqual(date));
 	}
 
+	@Override
+	public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndApplicationDeadlineLessThanEqual(LocalDate date) {
+		return new SuccessDataResult<List<JobAnnouncement>>
+		(this.jobAnnouncementDao.getByIsActiveTrueAndApplicationDeadlineLessThanEqual(date));
+	}
+
+
+
 }

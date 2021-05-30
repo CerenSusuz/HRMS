@@ -48,5 +48,10 @@ public class JobAnnouncementsController {
     public DataResult<List<JobAnnouncement>> getByApplicationDeadline(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return this.jobAnnouncementService.getByApplicationDeadlineLessThanEqual(date);
     }
+    
+    @GetMapping("/getByActiveAndApplicationDeadline")
+    public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndApplicationDeadlineLessThanEqual(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return this.jobAnnouncementService.getByIsActiveTrueAndApplicationDeadlineLessThanEqual(date);
+    }
 	
 }
