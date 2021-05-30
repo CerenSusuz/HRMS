@@ -56,6 +56,12 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 		(this.jobAnnouncementDao.getByIsActiveTrueAndApplicationDeadlineLessThanEqual(date));
 	}
 
+	@Override
+	public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndEmployer_CompanyName(String companyName) {
+		return new SuccessDataResult<List<JobAnnouncement>>
+		(this.jobAnnouncementDao.getByIsActiveTrueAndEmployer_CompanyName(companyName));
+	}
+
 
 
 }

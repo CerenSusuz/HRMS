@@ -15,4 +15,8 @@ public interface JobAnnouncementService {
 	DataResult<List<JobAnnouncement>> getByIsActiveTrue();
 	DataResult<List<JobAnnouncement>> getByApplicationDeadlineLessThanEqual(LocalDate date);
 	DataResult<List<JobAnnouncement>> getByIsActiveTrueAndApplicationDeadlineLessThanEqual(LocalDate date);
+	DataResult<List<JobAnnouncement>> getByIsActiveTrueAndEmployer_CompanyName(String companyName);
+	
+	
+	
 }
