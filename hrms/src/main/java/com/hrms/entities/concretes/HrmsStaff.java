@@ -17,13 +17,13 @@ import lombok.NoArgsConstructor;
 
 public class HrmsStaff extends User{
 	
-	@Column(name="first_name")
+	@Column(name="first_name",nullable = false)
 	private String firstName;
 	
-	@Column(name="last_name")
+	@Column(name="last_name",nullable = false)
 	private String lastName;
 	
-	@Column(name="nationality_id")
+	@Column(name="nationality_id",nullable = false)
 	private String nationalityId;
 
 	public HrmsStaff(String email,String password, boolean status,String firstName, String lastName, String nationalityId) {

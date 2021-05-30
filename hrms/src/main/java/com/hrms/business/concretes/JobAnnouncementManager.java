@@ -1,5 +1,6 @@
 package com.hrms.business.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 
 	@Override
 	public Result add(JobAnnouncement jobAnnouncement) {
+		jobAnnouncement.getReleaseDate().equals(LocalDate.now());
 		this.jobAnnouncementDao.save(jobAnnouncement);
 		return new SuccessResult("Job Announcement added ok");
 	}

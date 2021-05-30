@@ -20,10 +20,10 @@ public class Department {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="id",nullable = false)
 	private int id;
 	
-	@Column(name="name")
+	@Column(name="name",nullable = false)
 	private String name;
 	
 	@OneToMany(mappedBy="department")

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -27,28 +28,29 @@ public class JobAnnouncement {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id",nullable = false)
 	private int id;
 	
-	@Column(name = "description")
+	@Column(name = "description",nullable = false)
 	private String description;
 	
-	@Column(name = "min_salary")
+	@Column(name = "min_salary",nullable = false)
 	private int minSalary;
 	
-	@Column(name = "max_salary")
+	@Column(name = "max_salary",nullable = false)
 	private int maxSalary;
 	
-	@Column(name = "open_positions")
+	@Column(name = "open_positions",nullable = false)
 	private int openPositions;
 	
-	@Column(name = "application_deadline")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "application_deadline",nullable = false)
 	private LocalDate applicationDeadline;
 	
-	@Column(name = "is_active")
+	@Column(name = "is_active",nullable = false)
 	private boolean isActive;
 	
-	@Column(name = "release_date")
+	@Column(name = "release_date",nullable = false)
 	private LocalDate releaseDate;
 	
 	@JsonIgnoreProperties({"user_id","web_address","phone_number","email","password","status"})

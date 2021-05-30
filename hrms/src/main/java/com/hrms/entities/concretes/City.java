@@ -27,10 +27,10 @@ public class City {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id",nullable = false)
 	private int id;
 	
-	@Column(name = "name")
+	@Column(name = "name",nullable = false)
 	private String Name;
 	
 	@OneToMany(mappedBy= "city")
