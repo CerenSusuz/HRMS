@@ -58,5 +58,15 @@ public class JobAnnouncementsController {
     public DataResult<List<JobAnnouncement>> getByIsActiveAndEmployer_CompanyName(@RequestParam String companyName) {
         return this.jobAnnouncementService.getByIsActiveTrueAndEmployer_CompanyName(companyName);
     }
+    
+    @GetMapping("/getByEmployer")
+    public DataResult<List<JobAnnouncement>> getByEmployer(@RequestParam int id) {
+        return this.jobAnnouncementService.getByEmployerId(id);
+    }
+    
+    @GetMapping("/changeStatus")
+    public DataResult<JobAnnouncement> changeStatus(@RequestParam int employerId,@RequestParam int announcementId,@RequestParam boolean status) {
+        return this.jobAnnouncementService.changeStatus(employerId,announcementId,status);
+    }
 	
 }
