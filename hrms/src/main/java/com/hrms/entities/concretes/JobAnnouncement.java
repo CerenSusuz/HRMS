@@ -1,5 +1,7 @@
 package com.hrms.entities.concretes;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,13 +43,13 @@ public class JobAnnouncement {
 	private int openPositions;
 	
 	@Column(name = "application_deadline")
-	private String applicationDeadline;
+	private LocalDate applicationDeadline;
 	
 	@Column(name = "is_active")
 	private boolean isActive;
 	
 	@Column(name = "release_date")
-	private String releaseDate;
+	private LocalDate releaseDate;
 	
 	@JsonIgnoreProperties({"user_id","web_address","phone_number","email","password","status"})
 	@ManyToOne()
