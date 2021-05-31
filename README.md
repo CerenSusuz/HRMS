@@ -1,6 +1,6 @@
 # HRMS
 
-Human Resourse Management Software
+Human Resources Management Software
 
 <img src="https://github.com/CerenSusuz/HRMS/blob/main/hrms.jpg">
 
