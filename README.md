@@ -104,3 +104,5 @@ Listede firmadı, genel iş pozisyonu adı, açık pozisyon adedi, yayın tarihi
 <a href="https://www.baeldung.com/jpa-one-to-one">One-to-One Relationship in JPA</a>
 
 <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/format/annotation/DateTimeFormat.ISO.html">DateTimeFormat.ISO</a>
+
+<a href="https://medium.com/kodgemisi/spring-boot-ile-validation-yontemleri-cedc6701411e">Spring Boot ile Validation Yöntemleri</a>
