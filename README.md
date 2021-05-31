@@ -1,5 +1,7 @@
 # HRMS
+
 Human Resourse Management Software
+
 <img src="https://github.com/CerenSusuz/HRMS/blob/main/hrms.jpg">
 
 -------------------------------------------------
