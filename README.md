@@ -106,3 +106,5 @@ Listede firmadı, genel iş pozisyonu adı, açık pozisyon adedi, yayın tarihi
 <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/format/annotation/DateTimeFormat.ISO.html">DateTimeFormat.ISO</a>
 
 <a href="https://medium.com/kodgemisi/spring-boot-ile-validation-yontemleri-cedc6701411e">Spring Boot ile Validation Yöntemleri</a>
+
+<a href="https://tugrulbayrak.medium.com/maven-java-geli%C5%9Ftiricisinin-kurtar%C4%B1c%C4%B1s%C4%B1-914f345170a2">Maven</a>
