@@ -1,6 +1,6 @@
 # HRMS
 
-Human Resources Management System
+İstihdam ve Kariyer Platformu
 
 <img src="https://github.com/CerenSusuz/HRMS/blob/main/hrms.jpg">
 
