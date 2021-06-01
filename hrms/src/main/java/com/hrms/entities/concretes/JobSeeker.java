@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hrms.core.entities.concretes.User;
 
 import lombok.Data;
@@ -38,6 +39,11 @@ public class JobSeeker extends User{
 	@NotBlank
 	@NotNull(message="required")
 	private int yearOfBirth;
+	
+	@JsonIgnoreProperties({"id"})
+	@ManyToOne()
+	@JoinColumn(name="school_id")
+	private School school;
 
 	public JobSeeker(String email, String password, boolean status, String firstName, String lastName, String nationalityId, int yearOfBirth) {
 		super(email, password, status);
