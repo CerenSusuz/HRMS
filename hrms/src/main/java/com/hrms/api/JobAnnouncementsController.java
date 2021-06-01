@@ -3,6 +3,8 @@ package com.hrms.api;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,11 +37,11 @@ public class JobAnnouncementsController {
 	}
 	
     @PostMapping("/add")
-    public Result add(@RequestBody JobAnnouncement jobAnnouncement){
+    public Result add(@Valid @RequestBody JobAnnouncement jobAnnouncement){
         return this.jobAnnouncementService.add(jobAnnouncement);
     }
     
-    @GetMapping("/getByIsActiveTrue")
+    @GetMapping("/getByActive")
     public DataResult<List<JobAnnouncement>> getByIsActiveTrue() {
         return this.jobAnnouncementService.getByIsActiveTrue();
     }
@@ -54,7 +56,7 @@ public class JobAnnouncementsController {
         return this.jobAnnouncementService.getByIsActiveTrueAndApplicationDeadlineLessThanEqual(date);
     }
     
-    @GetMapping("/getByIsActiveAndCompanyName")
+    @GetMapping("/getByActiveAndCompanyName")
     public DataResult<List<JobAnnouncement>> getByIsActiveAndEmployer_CompanyName(@RequestParam String companyName) {
         return this.jobAnnouncementService.getByIsActiveTrueAndEmployer_CompanyName(companyName);
     }

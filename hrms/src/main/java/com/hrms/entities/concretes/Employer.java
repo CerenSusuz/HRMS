@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hrms.core.entities.concretes.User;
@@ -29,9 +32,14 @@ public class Employer extends User{
 	private String companyName;
 	
 	@Column(name = "web_address",nullable = false)
+	@NotBlank
+	@NotNull(message="required")
 	private String webAddress;
 	
 	@Column(name = "phone_number",nullable = false)
+	@NotBlank
+	@NotNull(message="required")
+	@Pattern(regexp ="[0-9\\s]{12}")
 	private String phoneNumber;
 	
 	@OneToMany(mappedBy= "employer")

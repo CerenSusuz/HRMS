@@ -3,6 +3,8 @@ package com.hrms.entities.concretes;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,6 +26,8 @@ public class Department {
 	private int id;
 	
 	@Column(name="name",nullable = false)
+	@NotBlank
+	@NotNull(message="required")
 	private String name;
 	
 	@OneToMany(mappedBy="department")

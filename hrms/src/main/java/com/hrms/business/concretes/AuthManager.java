@@ -54,7 +54,6 @@ public class AuthManager implements AuthService{
 	public Result employerRegister(EmployerForRegisterDto employer) {
 		
 		var result = BusinessRules.run(
-				 checkEmployerRegisterForm(employer),
 				 checkDomain(employer),
 				 checkEmailVerification(employer.getEmail()),
 				 checkHrmsConfirm(),
@@ -73,7 +72,6 @@ public class AuthManager implements AuthService{
 	@Override
 	public Result jobSeekerRegister(JobSeekerForRegisterDto jobSeeker){
 		Result result = BusinessRules.run(
-				checkJobSeekerRegisterForm(jobSeeker),
 				checkMernis(jobSeeker),
 				checkIfEmailExists(jobSeeker.getEmail()),
 				checkNationalityId(jobSeeker.getNationalityId()),
@@ -125,19 +123,6 @@ public class AuthManager implements AuthService{
 	
 	
 	//for jobSeekers
-	
-	private Result checkJobSeekerRegisterForm(JobSeekerForRegisterDto jobSeeker) {
-		if(jobSeeker.getFirstName().isBlank() == true ||
-			jobSeeker.getLastName().isBlank() == true ||
-		    jobSeeker.getNationalityId().isBlank() == true  ||
-			jobSeeker.getEmail().isBlank() == true ||
-			jobSeeker.getPassword().isBlank() == true ||
-			jobSeeker.getRePassword().isBlank() == true
-				){
-            return new ErrorResult("Please fill out the form, there is missing information.");
-        }
-		return new SuccessResult();
-	}
 		
 	private Result checkMernis(JobSeekerForRegisterDto jobSeeker) {
 		 
@@ -176,19 +161,6 @@ public class AuthManager implements AuthService{
 		if(this.hrmsService.confirm() == null) {
 			return new ErrorResult("Your registration has not been approved by our institution.");
 		}
-		return new SuccessResult();
-	}
-	
-	private Result checkEmployerRegisterForm(EmployerForRegisterDto employer) {
-		if(employer.getCompanyName().isBlank() == true ||
-		   employer.getWebAddress().isBlank() == true ||
-			employer.getPhoneNumber().isBlank() == true ||
-			employer.getEmail().isBlank() == true ||
-			employer.getPassword().isBlank() == true ||
-			employer.getRePassword().isBlank() == true
-				){
-            return new ErrorResult("Please fill out the form, there is missing information.");
-        }
 		return new SuccessResult();
 	}
 	

@@ -1,6 +1,8 @@
 package com.hrms.entities.concretes;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.hrms.core.entities.concretes.User;
 
@@ -18,15 +20,23 @@ import lombok.NoArgsConstructor;
 public class JobSeeker extends User{
 	
 	@Column(name="first_name",nullable = false)
+	@NotBlank
+	@NotNull(message="required")
 	private String firstName;
 	
 	@Column(name="last_name",nullable = false)
+	@NotBlank
+	@NotNull(message="required")
 	private String lastName;
 	
 	@Column(name="nationality_id",nullable = false)
+	@NotBlank
+	@NotNull(message="required")
 	private String nationalityId;
 	
 	@Column(name="year_of_birth",nullable = false)
+	@NotBlank
+	@NotNull(message="required")
 	private int yearOfBirth;
 
 	public JobSeeker(String email, String password, boolean status, String firstName, String lastName, String nationalityId, int yearOfBirth) {

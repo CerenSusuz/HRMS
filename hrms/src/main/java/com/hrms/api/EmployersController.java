@@ -2,6 +2,8 @@ package com.hrms.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +32,7 @@ public class EmployersController {
 	}
 	
     @PostMapping("/add")
-    public Result add(@RequestBody Employer employer){
+    public Result add(@Valid @RequestBody Employer employer){
         return this.employerService.add(employer);
     }
 
