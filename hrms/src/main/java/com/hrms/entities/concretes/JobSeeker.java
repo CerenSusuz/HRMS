@@ -1,5 +1,7 @@
 package com.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","schoolInfos"})
+
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "job_seekers")
 
@@ -40,10 +44,9 @@ public class JobSeeker extends User{
 	@NotNull(message="required")
 	private int yearOfBirth;
 	
-	@JsonIgnoreProperties({"id"})
-	@ManyToOne()
-	@JoinColumn(name="school_id")
-	private School school;
+	@OneToMany(mappedBy = "jobSeeker")
+	//@JoinColumn(name="school_id")
+	private List<SchoolInfo> schoolInfos;
 
 	public JobSeeker(String email, String password, boolean status, String firstName, String lastName, String nationalityId, int yearOfBirth) {
 		super(email, password, status);
