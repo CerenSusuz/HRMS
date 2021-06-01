@@ -11,8 +11,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,16 +37,12 @@ public class SchoolInfo {
     
     @Column(name = "start_date")
     @NotNull
-    @NotBlank
     private int startDate;
     
     @Column(name = "graduation_date")
     private int graduationDate;
     
     @ManyToOne()
-    @NotNull
-    @NotBlank
-    //@JsonIgnoreProperties({"email","password","firstName","lastName","nationalityId","status"})
     @JoinColumn(name = "jobSeeker_id")
     private JobSeeker jobSeeker;
 	

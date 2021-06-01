@@ -45,7 +45,6 @@ public class JobSeeker extends User{
 	private int yearOfBirth;
 	
 	@OneToMany(mappedBy = "jobSeeker")
-	//@JoinColumn(name="school_id")
 	private List<SchoolInfo> schoolInfos;
 
 	public JobSeeker(String email, String password, boolean status, String firstName, String lastName, String nationalityId, int yearOfBirth) {
