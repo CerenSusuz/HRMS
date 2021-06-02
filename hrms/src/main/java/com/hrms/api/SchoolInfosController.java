@@ -22,7 +22,7 @@ public class SchoolInfosController {
 	
 	private SchoolService schoolService;
 
-	 @Autowired
+	@Autowired
 	public SchoolInfosController(SchoolService schoolService) {
 		super();
 		this.schoolService = schoolService;
