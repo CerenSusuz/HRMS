@@ -10,5 +10,5 @@ import com.hrms.entities.concretes.SchoolInfo;
 
 @Repository
 public interface SchoolDao extends JpaRepository<SchoolInfo, Integer> {
-	List<SchoolInfo> getByJobSeekerId(Sort sort, int jobSeeker_id);
+	List<SchoolInfo> getByJobSeekerId(Sort sort, int jobSeekerId);
 }

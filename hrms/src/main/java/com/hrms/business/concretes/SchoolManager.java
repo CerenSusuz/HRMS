@@ -38,17 +38,17 @@ public class SchoolManager implements SchoolService {
 	}
 
 	@Override
-	public DataResult<List<SchoolInfo>> getByJobSeekerIdOrderByGraduationDateASC(int jobSeeker_id) {
+	public DataResult<List<SchoolInfo>> getByJobSeekerIdOrderByGraduationDateASC(int jobSeekerId) {
 		Sort sortBy = Sort.by(Sort.Direction.ASC,"graduationDate");
 		return new SuccessDataResult<List<SchoolInfo>>
-		(this.schoolDao.getByJobSeekerId(sortBy,jobSeeker_id),"asc sorted ok");
+		(this.schoolDao.getByJobSeekerId(sortBy,jobSeekerId),"asc sorted ok");
 	}
 
 	@Override
-	public DataResult<List<SchoolInfo>> getByJobSeekerIdOrderByGraduationDateDESC(int jobSeeker_id) {
+	public DataResult<List<SchoolInfo>> getByJobSeekerIdOrderByGraduationDateDESC(int jobSeekerId) {
 		Sort sortBy = Sort.by(Sort.Direction.DESC,"graduationDate");
 		return new SuccessDataResult<List<SchoolInfo>>
-		(this.schoolDao.getByJobSeekerId(sortBy,jobSeeker_id),"desc sorted ok");
+		(this.schoolDao.getByJobSeekerId(sortBy,jobSeekerId),"desc sorted ok");
 	}
 
 }
