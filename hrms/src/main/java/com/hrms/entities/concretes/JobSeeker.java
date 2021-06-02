@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hrms.core.entities.concretes.User;
 
 import lombok.Data;
@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","schoolInfos"})
 
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "job_seekers")
@@ -45,8 +44,17 @@ public class JobSeeker extends User{
 	private int yearOfBirth;
 	
 	@OneToMany(mappedBy = "jobSeeker")
+	@JsonIgnore()
 	private List<SchoolInfo> schoolInfos;
-
+	
+	@OneToMany(mappedBy = "jobSeeker")
+	@JsonIgnore()
+	private List<JobExperience> jobExperiences;
+	
+	@OneToMany(mappedBy = "jobSeeker")
+	@JsonIgnore()
+	private List<Language> languages;
+	
 	public JobSeeker(String email, String password, boolean status, String firstName, String lastName, String nationalityId, int yearOfBirth) {
 		super(email, password, status);
 		this.firstName = firstName;
