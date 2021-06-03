@@ -6,10 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.hrms.business.abstracts.MailService;
 import com.hrms.business.concretes.MailManager;
 import com.hrms.core.adapters.mernis.MernisServiceAdapter;
 import com.hrms.core.adapters.mernis.UserCheckService;
+import com.hrms.core.utilities.helpers.CloudinaryManager;
+import com.hrms.core.utilities.helpers.abstracts.FileHelper;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -49,5 +53,18 @@ public class HrmsApplication {
           .select()                                  
           .apis(RequestHandlerSelectors.basePackage("com.hrms"))                                     
           .build();                                           
+    }
+	
+    @Bean
+    public FileHelper helper(){
+        return new CloudinaryManager(cloudinaryManager());
+    }
+	
+    @Bean
+    public Cloudinary cloudinaryManager(){
+        return new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "doaflttr9",
+                "api_key", "733931973621399",
+                "api_secret", "A3VOJWx9AdaQWv-0lIQqiZbMeCI"));
     }
 }
