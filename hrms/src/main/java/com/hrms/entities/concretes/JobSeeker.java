@@ -59,6 +59,15 @@ public class JobSeeker extends User{
 	@JsonIgnore()
 	private List<Link> links;
 	
+	@OneToMany(mappedBy = "jobSeeker")
+	@JsonIgnore()
+	private List<Skill> skills;
+
+	@OneToMany(mappedBy = "jobSeeker")
+	@JsonIgnore()
+	private List<PreWriting> preWritings;
+	
+	
 	public JobSeeker(String email, String password, boolean status, String firstName, String lastName, String nationalityId, int yearOfBirth) {
 		super(email, password, status);
 		this.firstName = firstName;

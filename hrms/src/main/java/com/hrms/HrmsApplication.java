@@ -8,10 +8,6 @@ import org.springframework.context.annotation.Bean;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.hrms.business.abstracts.MailService;
-import com.hrms.business.concretes.MailManager;
-import com.hrms.core.adapters.mernis.MernisServiceAdapter;
-import com.hrms.core.adapters.mernis.UserCheckService;
 import com.hrms.core.utilities.helpers.CloudinaryManager;
 import com.hrms.core.utilities.helpers.abstracts.FileHelper;
 

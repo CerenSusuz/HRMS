@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -30,24 +32,38 @@ public class JobAnnouncement {
 	@Column(name = "id",nullable = false)
 	private int id;
 	
+    @NotNull
+    @NotBlank
 	@Column(name = "description",nullable = false)
 	private String description;
 	
+    @NotNull
+    @NotBlank
 	@Column(name = "min_salary",nullable = false)
 	private int minSalary;
 	
+    @NotNull
+    @NotBlank
 	@Column(name = "max_salary",nullable = false)
 	private int maxSalary;
 	
+    @NotNull
+    @NotBlank
 	@Column(name = "open_positions",nullable = false)
 	private int openPositions;
 	
+    @NotNull
+    @NotBlank
 	@Column(name = "application_deadline",nullable = false)
 	private LocalDate applicationDeadline;
 	
+    @NotNull
+    @NotBlank
 	@Column(name = "is_active",nullable = false)
 	private boolean isActive;
 	
+    @NotNull
+    @NotBlank
 	@Column(name = "release_date",nullable = false)
 	private LocalDate releaseDate;
 	
