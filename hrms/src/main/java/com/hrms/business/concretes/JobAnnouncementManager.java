@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hrms.business.abstracts.JobAnnouncementService;
 import com.hrms.core.utilities.results.DataResult;
 import com.hrms.core.utilities.results.ErrorDataResult;
+import com.hrms.core.utilities.results.ErrorResult;
 import com.hrms.core.utilities.results.Result;
 import com.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.core.utilities.results.SuccessResult;
@@ -28,45 +29,66 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 
 	@Override
 	public DataResult<List<JobAnnouncement>> getAll() {
-		return new SuccessDataResult<List<JobAnnouncement>>
-		(this.jobAnnouncementDao.findAll());
+		var result = this.jobAnnouncementDao.findAll();
+		if (result != null) {
+			return new SuccessDataResult<List<JobAnnouncement>>(result);
+		}
+		return new ErrorDataResult<List<JobAnnouncement>>();
 	}
 
 	@Override
 	public Result add(JobAnnouncement jobAnnouncement) {
-		jobAnnouncement.getReleaseDate().equals(LocalDate.now());
-		this.jobAnnouncementDao.save(jobAnnouncement);
-		return new SuccessResult("Job Announcement added ok");
+		jobAnnouncement.setReleaseDate(LocalDate.now());
+		 var result = this.jobAnnouncementDao.save(jobAnnouncement);
+		 if (result != null) {
+			 return new SuccessResult("Job Announcement added ok");
+		}
+		return new ErrorResult("Job Announcement added NOT ok");
 	}
 
 	@Override
 	public DataResult<List<JobAnnouncement>> getByIsActiveTrue() {
-		return new SuccessDataResult<List<JobAnnouncement>>
-		(this.jobAnnouncementDao.getByIsActiveTrue());
-	}
+		var result = this.jobAnnouncementDao.getByIsActiveTrue();
+		if (result != null) {
+			return new SuccessDataResult<List<JobAnnouncement>>(result,"Active Job announcements get ok");
+		}
+		return new SuccessDataResult<List<JobAnnouncement>>("Active Job announcements get NOT ok");
+		}
 
 	@Override
 	public DataResult<List<JobAnnouncement>> getByApplicationDeadlineLessThanEqual(LocalDate date) {
-		return new SuccessDataResult<List<JobAnnouncement>>
-		(this.jobAnnouncementDao.getByApplicationDeadlineLessThanEqual(date));
+		var result = this.jobAnnouncementDao.getByApplicationDeadlineLessThanEqual(date);
+		if (result !=  null) {
+			return new SuccessDataResult<List<JobAnnouncement>>(result);
+		}
+		return new ErrorDataResult<List<JobAnnouncement>>();
 	}
 
 	@Override
 	public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndApplicationDeadlineLessThanEqual(LocalDate date) {
-		return new SuccessDataResult<List<JobAnnouncement>>
-		(this.jobAnnouncementDao.getByIsActiveTrueAndApplicationDeadlineLessThanEqual(date));
+		var result = this.jobAnnouncementDao.getByIsActiveTrueAndApplicationDeadlineLessThanEqual(date);
+		if (result != null) {
+			return new SuccessDataResult<List<JobAnnouncement>>(result,"OK");
+		}
+		return new ErrorDataResult<List<JobAnnouncement>>("NOT OK");
 	}
 
 	@Override
 	public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndEmployer_CompanyName(String companyName) {
-		return new SuccessDataResult<List<JobAnnouncement>>
-		(this.jobAnnouncementDao.getByIsActiveTrueAndEmployer_CompanyName(companyName));
+		var result = this.jobAnnouncementDao.getByIsActiveTrueAndEmployer_CompanyName(companyName);
+		if (result != null) {
+			return new SuccessDataResult<List<JobAnnouncement>>(result,"OK");
+		}
+		return new ErrorDataResult<List<JobAnnouncement>>("NOT OK");
 	}
 
 	@Override
 	public DataResult<List<JobAnnouncement>> getByEmployerId(int id) {
-		return new SuccessDataResult<List<JobAnnouncement>>
-		(this.jobAnnouncementDao.getByEmployerId(id));
+		var result = this.jobAnnouncementDao.getByEmployerId(id);
+		if (result != null) {
+			return new SuccessDataResult<List<JobAnnouncement>>(result,"Ok");
+		}
+		return new ErrorDataResult<List<JobAnnouncement>>("Not ok");
 	}
 
 	@Override

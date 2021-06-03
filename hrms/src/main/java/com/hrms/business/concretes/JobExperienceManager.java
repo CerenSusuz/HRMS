@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.JobExperienceService;
 import com.hrms.core.utilities.results.DataResult;
+import com.hrms.core.utilities.results.ErrorDataResult;
+import com.hrms.core.utilities.results.ErrorResult;
 import com.hrms.core.utilities.results.Result;
 import com.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.core.utilities.results.SuccessResult;
@@ -27,28 +29,44 @@ public class JobExperienceManager implements JobExperienceService {
 
 	@Override
 	public Result add(JobExperience jobExperience) {
-		this.jobExperienceDao.save(jobExperience);
-		return new SuccessResult("job Experience add ok");
+		var result = this.jobExperienceDao.save(jobExperience);
+		
+		if (result != null) {
+			return new SuccessResult("job Experience add ok");
+		}
+		return new ErrorResult("job Experience add NOT ok");
 	}
 
 	@Override
 	public DataResult<List<JobExperience>> getAll() {
-		return new SuccessDataResult<List<JobExperience>>
-		(this.jobExperienceDao.findAll());
+		var result = this.jobExperienceDao.findAll();
+		
+		if (result != null) {
+			return new SuccessDataResult<List<JobExperience>>(result);
+		}
+		return new ErrorDataResult<List<JobExperience>>("job experiences getAll NOT ok");
 	}
 
 	@Override
 	public DataResult<List<JobExperience>> getByJobSeekerIdOrderByDateOfEndASC(int jobSeeker_id) {
 		Sort sortBy = Sort.by(Sort.Direction.ASC,"dateOfEnd");
-		return new SuccessDataResult<List<JobExperience>>
-		(this.jobExperienceDao.getByJobSeekerId(sortBy,jobSeeker_id),"asc sorted ok");
+		
+		var result = this.jobExperienceDao.getByJobSeekerId(sortBy,jobSeeker_id);
+		if ( result != null) {
+			return new SuccessDataResult<List<JobExperience>>(result,"asc sorted ok");
+		}
+		return new ErrorDataResult<List<JobExperience>>("asc sorted NOT ok");
 	}
 
 	@Override
 	public DataResult<List<JobExperience>> getByJobSeekerIdOrderByDateOfEndDESC(int jobSeeker_id) {
 		Sort sortBy = Sort.by(Sort.Direction.DESC,"dateOfEnd");
-		return new SuccessDataResult<List<JobExperience>>
-		(this.jobExperienceDao.getByJobSeekerId(sortBy,jobSeeker_id),"desc sorted ok");
+		
+		var result = this.jobExperienceDao.getByJobSeekerId(sortBy,jobSeeker_id);
+		if(result != null){
+			return new SuccessDataResult<List<JobExperience>>(result,"desc sorted ok");
+			}
+		return new ErrorDataResult<List<JobExperience>>("desc sorted NOT ok");
 	}
 	
 	
