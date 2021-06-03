@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.SchoolService;
 import com.hrms.core.utilities.results.DataResult;
+import com.hrms.core.utilities.results.ErrorDataResult;
+import com.hrms.core.utilities.results.ErrorResult;
 import com.hrms.core.utilities.results.Result;
 import com.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.core.utilities.results.SuccessResult;
@@ -27,28 +29,40 @@ public class SchoolManager implements SchoolService {
 
 	@Override
 	public Result add(SchoolInfo school) {
-		this.schoolDao.save(school);
-		return new SuccessResult("SchoolInfo add ok");
+		var result = this.schoolDao.save(school);
+		if (result != null) {
+			return new SuccessResult("SchoolInfo add ok");
+		}
+		return new ErrorResult("SchoolInfo add NOT ok");
 	}
 
 	@Override
 	public DataResult<List<SchoolInfo>> getAll() {
-		return new SuccessDataResult<List<SchoolInfo>>
-		(this.schoolDao.findAll());
+		var result = this.schoolDao.findAll();
+		if (result != null) {
+			return new SuccessDataResult<List<SchoolInfo>>(result);
+		}
+		return new ErrorDataResult<List<SchoolInfo>>();
 	}
 
 	@Override
 	public DataResult<List<SchoolInfo>> getByJobSeekerIdOrderByGraduationDateASC(int jobSeekerId) {
 		Sort sortBy = Sort.by(Sort.Direction.ASC,"graduationDate");
-		return new SuccessDataResult<List<SchoolInfo>>
-		(this.schoolDao.getByJobSeekerId(sortBy,jobSeekerId),"asc sorted ok");
+		var result = this.schoolDao.getByJobSeekerId(sortBy,jobSeekerId);
+		if (result != null) {
+			return new SuccessDataResult<List<SchoolInfo>>(result,"asc sorted ok");
+		}
+		return new SuccessDataResult<List<SchoolInfo>>("asc sorted NOT ok");
 	}
 
 	@Override
 	public DataResult<List<SchoolInfo>> getByJobSeekerIdOrderByGraduationDateDESC(int jobSeekerId) {
 		Sort sortBy = Sort.by(Sort.Direction.DESC,"graduationDate");
-		return new SuccessDataResult<List<SchoolInfo>>
-		(this.schoolDao.getByJobSeekerId(sortBy,jobSeekerId),"desc sorted ok");
+		var result = this.schoolDao.getByJobSeekerId(sortBy,jobSeekerId);
+		if (result != null) {
+			return new SuccessDataResult<List<SchoolInfo>>(result,"desc sorted ok");
+		}
+		return new SuccessDataResult<List<SchoolInfo>>("desc sorted NOT ok");
 	}
 
 }

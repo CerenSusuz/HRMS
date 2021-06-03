@@ -28,23 +28,12 @@ public class HrmsApplication {
 		SpringApplication.run(HrmsApplication.class, args);
 	}
 	
-    
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration()
             .setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper;
-    }
-
-    @Bean
-    public UserCheckService checkPersonService(){
-        return new MernisServiceAdapter();
-    }
-    
-    @Bean
-    public MailService mailService(){
-        return new MailManager();
     }
     
 	@Bean

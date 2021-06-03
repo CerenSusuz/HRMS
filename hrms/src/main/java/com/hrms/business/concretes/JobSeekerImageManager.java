@@ -36,10 +36,11 @@ public class JobSeekerImageManager implements JobSeekerImageService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Result add(MultipartFile file, JobSeekerImage image) throws IOException {
-		Map<String,String> result = (Map<String,String>)helper.upload(file).getData();
-		image.setPath(result.get("url"));
+		Map<String,String> getImage = (Map<String,String>)helper.upload(file).getData();
+		image.setPath(getImage.get("url"));
 		image.setUploadedAt(LocalDate.now());
-		if(this.jobSeekerImageDao.save(image) != null) {
+		var result = this.jobSeekerImageDao.save(image);
+		if(result != null) {
 			return new SuccessResult("image upload ok");
 		}
 		return new ErrorResult("image upload NOT ok");

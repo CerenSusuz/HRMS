@@ -25,16 +25,20 @@ public class UserManager implements UserService {
 
 	@Override
 	public DataResult<User> getByEmail(String email) {
-		if (userDao.getByEmail(email) != null) {
-			return new SuccessDataResult<User>("User founded");
+		var result = userDao.getByEmail(email);
+		if (result != null) {
+			return new SuccessDataResult<User>(result,"User founded");
 		}
 		return new ErrorDataResult<User>();
 	}
 
 	@Override
 	public Result add(User user) {
-		this.userDao.save(user);
-		return new SuccessResult("User Add OK");
+		 var result = this.userDao.save(user);
+		 if (result != null) {
+			 return new SuccessResult("User Add OK");
+		}
+		return new SuccessResult("User Add NOT OK");
 	}
 
 

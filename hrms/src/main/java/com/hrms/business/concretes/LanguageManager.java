@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.LanguageService;
 import com.hrms.core.utilities.results.DataResult;
+import com.hrms.core.utilities.results.ErrorDataResult;
+import com.hrms.core.utilities.results.ErrorResult;
 import com.hrms.core.utilities.results.Result;
 import com.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.core.utilities.results.SuccessResult;
@@ -26,20 +28,29 @@ public class LanguageManager implements LanguageService{
 
 	@Override
 	public Result add(Language language) {
-		this.languageDao.save(language);
-		return new SuccessResult("language add ok");
+		var result = this.languageDao.save(language);
+		if (result != null) {
+			return new SuccessResult("language add ok");
+		}
+		return new ErrorResult("language add NOT ok");
 	}
 
 	@Override
 	public DataResult<List<Language>> getAll() {
-		return new SuccessDataResult<List<Language>>
-		(this.languageDao.findAll());
+		var result =this.languageDao.findAll();
+		if (result != null) {
+			return new SuccessDataResult<List<Language>>(result,"OK");
+		}
+		return new ErrorDataResult<List<Language>>("NOT OK");
 	}
 
 	@Override
 	public DataResult<List<Language>> getByJobSeekerId(int jobSeekerId) {
-		return new SuccessDataResult<List<Language>>
-		(this.languageDao.getByJobSeekerId(jobSeekerId));
+		var result = this.languageDao.getByJobSeekerId(jobSeekerId);
+		if (result != null) {
+			return new SuccessDataResult<List<Language>>(result,"OK");
+		}
+		return new ErrorDataResult<List<Language>>("NOT OK");
 	}
 	
 	
