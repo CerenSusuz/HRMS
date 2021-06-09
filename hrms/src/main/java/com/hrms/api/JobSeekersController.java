@@ -13,6 +13,7 @@ import com.hrms.business.abstracts.JobSeekerService;
 import com.hrms.core.utilities.results.DataResult;
 import com.hrms.core.utilities.results.Result;
 import com.hrms.entities.concretes.JobSeeker;
+import com.hrms.entities.dtos.CVDto;
 
 @RestController
 @CrossOrigin
@@ -29,6 +30,11 @@ public class JobSeekersController {
 	@GetMapping("/getall")
 	public DataResult<List<JobSeeker>> getAll(){
 		return this.jobSeekerService.getAll();
+	}
+	
+	@GetMapping("/getcv")
+	public DataResult<CVDto> getCV(int id){
+		return this.jobSeekerService.getCvById(id);
 	}
 	
     @PostMapping("/add")
