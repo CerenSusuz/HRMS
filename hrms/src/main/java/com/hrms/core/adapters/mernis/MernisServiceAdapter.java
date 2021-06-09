@@ -2,6 +2,7 @@ package com.hrms.core.adapters.mernis;
 
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class MernisServiceAdapter implements UserCheckService {
 
