@@ -13,4 +13,6 @@ public interface JobSeekerService {
 	DataResult<CVDto> getCvById(int id);
 	DataResult<JobSeeker> getById(int id);
 	Result add(JobSeeker jobSeeker);
+	//delete
+	//update
 }

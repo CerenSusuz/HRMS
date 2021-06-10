@@ -19,5 +19,7 @@ public interface JobAnnouncementService {
 	DataResult<List<JobAnnouncement>> getByIsActiveTrueAndEmployer_CompanyName(String companyName);
 	DataResult<List<JobAnnouncement>> getByEmployerId(int id);
 	
+	//delete
+	//update
 	
 }

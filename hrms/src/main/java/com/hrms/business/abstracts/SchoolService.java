@@ -8,6 +8,8 @@ import com.hrms.entities.concretes.SchoolInfo;
 
 public interface SchoolService {
 	Result add(SchoolInfo school);
+	//delete
+	//update
 	DataResult<List<SchoolInfo>> getAll();
 	DataResult<List<SchoolInfo>> getByJobSeekerIdOrderByGraduationDateASC(int jobSeekerId);
 	DataResult<List<SchoolInfo>> getByJobSeekerIdOrderByGraduationDateDESC(int jobSeekerId);

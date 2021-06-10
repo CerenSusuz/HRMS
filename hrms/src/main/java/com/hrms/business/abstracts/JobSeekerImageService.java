@@ -13,4 +13,6 @@ public interface JobSeekerImageService {
 	Result add(MultipartFile file, JobSeekerImage image)throws IOException;
 	DataResult<JobSeekerImage> getById(int id)throws IOException;
 	DataResult<List<JobSeekerImage>> getByJobSeekerId(int jobSeekerId);
+	//delete
+	//update
 }

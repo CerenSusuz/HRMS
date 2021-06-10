@@ -8,6 +8,8 @@ import com.hrms.entities.concretes.Link;
 
 public interface LinkService {
 	Result add(Link link);
+	//delete
+	//update
 	DataResult<List<Link>> getAll();
 	DataResult<List<Link>> getByJobSeekerId(int jobSeekerId);
 }

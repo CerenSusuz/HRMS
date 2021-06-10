@@ -8,6 +8,8 @@ import com.hrms.entities.concretes.Skill;
 
 public interface SkillService {
 	Result add(Skill skill);
+	//delete
+	//update
 	DataResult<List<Skill>> getAll();
 	DataResult<List<Skill>> getByJobSeekerId(int jobSeekerId);
 }

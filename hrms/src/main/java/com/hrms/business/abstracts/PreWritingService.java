@@ -8,6 +8,8 @@ import com.hrms.entities.concretes.PreWriting;
 
 public interface PreWritingService {
 	Result add(PreWriting preWriting);
+	//delete
+	//update
 	DataResult<List<PreWriting>> getAll();
 	DataResult<List<PreWriting>> getByJobSeekerId(int jobSeekerId);
 }
