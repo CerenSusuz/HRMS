@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "job_seekers")
 

@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hrms.core.entities.concretes.User;
 
 import lombok.Data;
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "employers")
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAnnouncements"})
 
 public class Employer extends User{
 	

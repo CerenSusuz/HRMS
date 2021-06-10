@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +31,7 @@ public class Department {
 	@NotNull(message="required")
 	private String name;
 	
+	@JsonIgnore()
 	@OneToMany(mappedBy="department")
 	private List<JobAnnouncement> jobAnnouncements;
 }

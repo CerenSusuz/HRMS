@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -30,12 +29,10 @@ public class Skill {
 
     @Column(name = "name")
     @NotNull
-    @NotBlank
     private String name;
 
     @ManyToOne()
     @NotNull
-    @NotBlank
     @JoinColumn(name = "jobSeeker_id")
     private JobSeeker jobSeeker;
 }

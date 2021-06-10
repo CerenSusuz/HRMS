@@ -10,8 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -39,21 +42,25 @@ public class JobAnnouncement {
 	
     @NotNull
     @NotBlank
+    @PositiveOrZero
 	@Column(name = "min_salary",nullable = false)
 	private int minSalary;
 	
     @NotNull
     @NotBlank
+    @PositiveOrZero
 	@Column(name = "max_salary",nullable = false)
 	private int maxSalary;
 	
     @NotNull
     @NotBlank
+    @Positive
 	@Column(name = "open_positions",nullable = false)
 	private int openPositions;
 	
     @NotNull
     @NotBlank
+    @Future
 	@Column(name = "application_deadline",nullable = false)
 	private LocalDate applicationDeadline;
 	
@@ -67,8 +74,8 @@ public class JobAnnouncement {
 	@Column(name = "release_date",nullable = false)
 	private LocalDate releaseDate;
 	
-	@JsonIgnoreProperties({"user_id","web_address","phone_number","email","password","status"})
 	@ManyToOne()
+	@JsonIgnoreProperties({"id","webAddress","phoneNumber","password","email","status"})
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
 	
