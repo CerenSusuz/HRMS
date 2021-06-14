@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,9 +35,15 @@ public class JobSeekerImage {
     @Column(name = "uploaded_at")
     private LocalDate uploadedAt;
 
+	@JsonIgnoreProperties({"id"})
     @ManyToOne()
     @JoinColumn(name = "jobSeeker_id")
     private JobSeeker jobSeeker;
+    
+	@JsonIgnoreProperties({"id"})
+	@ManyToOne()
+	@JoinColumn(name="curriculum_vitae_id")
+	private CurriculumVitae cv;
 
 
     

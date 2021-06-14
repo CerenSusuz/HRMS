@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,4 +37,9 @@ public class Skill {
     @NotNull
     @JoinColumn(name = "jobSeeker_id")
     private JobSeeker jobSeeker;
+    
+	@JsonIgnoreProperties({"id"})
+	@ManyToOne()
+	@JoinColumn(name="curriculum_vitae_id")
+	private CurriculumVitae cv;
 }
