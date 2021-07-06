@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.hrms.entities.concretes.CurriculumVitae;
 
 public interface CurriculumVitaeDao extends JpaRepository<CurriculumVitae,Integer> {
-
+	CurriculumVitae getById(int id);
 }

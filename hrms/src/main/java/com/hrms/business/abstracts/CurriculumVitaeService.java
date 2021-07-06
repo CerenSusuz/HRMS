@@ -9,4 +9,5 @@ import com.hrms.entities.concretes.CurriculumVitae;
 public interface CurriculumVitaeService {
 	Result add(CurriculumVitae curriculumVitae);
 	DataResult<List<CurriculumVitae>> getAll();
+	DataResult<CurriculumVitae> getById(int id);
 }

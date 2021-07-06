@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -74,18 +75,18 @@ public class JobAnnouncement {
 	@Column(name = "release_date",nullable = false)
 	private LocalDate releaseDate;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Employer.class)
 	@JsonIgnoreProperties({"id","webAddress","phoneNumber","password","email","status"})
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
 	
 	@JsonIgnoreProperties({"id"})
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = City.class)
 	@JoinColumn(name = "city_id")
 	private City city;
 	
 	@JsonIgnoreProperties({"id"})
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Department.class)
 	@JoinColumn(name="department_id")
 	private Department department;
 	

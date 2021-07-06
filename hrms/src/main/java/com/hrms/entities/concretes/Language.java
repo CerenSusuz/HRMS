@@ -2,6 +2,7 @@ package com.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,8 +13,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,13 +41,12 @@ public class Language {
     @NotNull
     private short level;
 	
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = JobSeeker.class)
     @JoinColumn(name = "jobSeeker_id",nullable = false)
     private JobSeeker jobSeeker;
     
-	@JsonIgnoreProperties({"id"})
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = CurriculumVitae.class)
 	@JoinColumn(name="curriculum_vitae_id")
-	private CurriculumVitae cv;
+	private CurriculumVitae curriculumVitae;
 
 }

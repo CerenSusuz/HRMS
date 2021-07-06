@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,12 +24,17 @@ import lombok.NoArgsConstructor;
 @Table(name="curriculum_vitaes")
 @Entity
 public class CurriculumVitae {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="id",unique = true, nullable = false)
 	private int id;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER,
+	        cascade = {
+	                CascadeType.MERGE,
+	                CascadeType.REFRESH
+	                })
 	@JoinColumn(name = "jobSeeker_id", referencedColumnName = "user_id")
 	private JobSeeker jobSeeker;
 	
@@ -43,6 +49,9 @@ public class CurriculumVitae {
 	private List<Link> links;
 	
 	@OneToMany(mappedBy = "curriculumVitae")
+	private List<City> cities;
+	
+	@OneToMany(mappedBy = "curriculumVitae")
 	private List<PreWriting> preWritings;
 	
 	@OneToMany(mappedBy = "curriculumVitae")
@@ -53,6 +62,5 @@ public class CurriculumVitae {
 	
 	@OneToMany(mappedBy = "curriculumVitae")
 	private List<JobExperience> jobExperiences;
-	
 	
 }

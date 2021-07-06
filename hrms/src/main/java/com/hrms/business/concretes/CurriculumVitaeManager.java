@@ -44,4 +44,13 @@ public class CurriculumVitaeManager implements CurriculumVitaeService{
 		return new ErrorDataResult<List<CurriculumVitae>>("Not ok");
 	}
 
+	@Override
+	public DataResult<CurriculumVitae> getById(int id) {
+		var result = this.curriculumVitaeDao.getById(id);
+		if (result != null) {
+			return new SuccessDataResult<CurriculumVitae>("CV founded");
+		}
+		return new ErrorDataResult<CurriculumVitae>("CV NOT founded");
+	}
+
 }

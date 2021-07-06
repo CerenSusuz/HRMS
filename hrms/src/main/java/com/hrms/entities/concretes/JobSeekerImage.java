@@ -4,13 +4,16 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -32,18 +35,16 @@ public class JobSeekerImage {
     @Column(name = "path")
     private String path;
 
-    @Column(name = "uploaded_at")
+    @Column(name = "uploaded_at", nullable=true)
     private LocalDate uploadedAt;
 
-	@JsonIgnoreProperties({"id"})
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = JobSeeker.class)
     @JoinColumn(name = "jobSeeker_id")
     private JobSeeker jobSeeker;
     
-	@JsonIgnoreProperties({"id"})
-	@ManyToOne()
-	@JoinColumn(name="curriculum_vitae_id")
-	private CurriculumVitae cv;
+	@OneToOne(mappedBy = "jobSeeker")
+	@JsonIgnore()
+    private CurriculumVitae curriculumVitae;
 
 
     

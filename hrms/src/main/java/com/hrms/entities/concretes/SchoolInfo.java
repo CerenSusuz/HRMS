@@ -2,6 +2,7 @@ package com.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,13 +43,13 @@ public class SchoolInfo {
     @Column(name = "graduation_date")
     private int graduationDate;
     
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = JobSeeker.class)
     @JoinColumn(name = "jobSeeker_id")
     private JobSeeker jobSeeker;
     
 	@JsonIgnoreProperties({"id"})
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = CurriculumVitae.class)
 	@JoinColumn(name="curriculum_vitae_id")
-	private CurriculumVitae cv;
+	private CurriculumVitae curriculumVitae;
 	
 }

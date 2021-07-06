@@ -2,6 +2,7 @@ package com.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,10 +49,9 @@ public class JobExperience {
     @JoinColumn(name = "job_seeker_id",nullable = false)
     private JobSeeker jobSeeker;
     
-	@JsonIgnoreProperties({"id"})
-	@ManyToOne()
-	@JoinColumn(name="curriculum_vitae_id")
-	private CurriculumVitae cv;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "curriculum_vitae_id")
+	private CurriculumVitae curriculumVitae;
 	
 
 }

@@ -35,6 +35,11 @@ public class CurriculumVitaeController {
 		return this.curriculumVitaeService.getAll();
 	}
 	
+	@GetMapping("/getById")
+	public DataResult<CurriculumVitae> getById(int id){
+		return this.curriculumVitaeService.getById(id);
+	}
+	
     @PostMapping("/add")
     public Result add(@Valid @RequestBody CurriculumVitae curriculumVitae){
         return this.curriculumVitaeService.add(curriculumVitae);
