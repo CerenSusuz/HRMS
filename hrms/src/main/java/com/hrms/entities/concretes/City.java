@@ -4,12 +4,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -41,9 +38,7 @@ public class City {
 	private String Name;
 	
 	@OneToMany(mappedBy= "city")
-	private List<JobAnnouncement> jobAnnouncements;
+	private List<JobAnnouncement> jobAnnouncements; 
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = CurriculumVitae.class)
-	@JoinColumn(name = "curriculum_vitae_id")
-	private CurriculumVitae curriculumVitae;
+
 }

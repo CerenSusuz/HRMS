@@ -44,9 +44,6 @@ public class Language {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = JobSeeker.class)
     @JoinColumn(name = "jobSeeker_id",nullable = false)
     private JobSeeker jobSeeker;
-    
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = CurriculumVitae.class)
-	@JoinColumn(name="curriculum_vitae_id")
-	private CurriculumVitae curriculumVitae;
+   
 
 }

@@ -2,7 +2,6 @@ package com.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,9 +48,4 @@ public class JobExperience {
     @JoinColumn(name = "job_seeker_id",nullable = false)
     private JobSeeker jobSeeker;
     
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "curriculum_vitae_id")
-	private CurriculumVitae curriculumVitae;
-	
-
 }

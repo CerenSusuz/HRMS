@@ -66,8 +66,6 @@ public class JobSeeker extends User{
 	@JsonIgnore()
 	private List<PreWriting> preWritings;
 	
-	@OneToOne(mappedBy = "jobSeeker")
-    private CurriculumVitae curriculumVitae;
 	
 	public JobSeeker(String email, String password, boolean status, String firstName, String lastName, String nationalityId, int yearOfBirth) {
 		super(email, password, status);

@@ -43,6 +43,6 @@ public class CityManager implements CityService{
 		}
 		return new ErrorResult("City added NOT ok");
 	}
-	
+
 	
 }

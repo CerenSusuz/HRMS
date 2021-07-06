@@ -9,6 +9,4 @@ import com.hrms.entities.concretes.City;
 public interface CityService {
 	DataResult<List<City>> getAll();
 	Result add(City city);
-	//delete
-	//update
 }

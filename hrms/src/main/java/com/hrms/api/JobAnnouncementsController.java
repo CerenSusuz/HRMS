@@ -48,6 +48,21 @@ public class JobAnnouncementsController {
         return this.jobAnnouncementService.getByIsActiveTrue();
     }
     
+    @GetMapping("/getById")
+    public DataResult<JobAnnouncement> getById(int id) {
+        return this.jobAnnouncementService.getById(id);
+    }
+    
+    @GetMapping("/getByIsActiveTrueAndDepartment_Id")
+    public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndDepartment_Id(int id) {
+        return this.jobAnnouncementService.getByIsActiveTrueAndDepartment_Id(id);
+    }
+    
+    @GetMapping("/getByIsActiveTrueAndCity_Id")
+    public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndCity_Id(int id) {
+        return this.jobAnnouncementService.getByIsActiveTrueAndCity_Id(id);
+    }
+    
     @GetMapping("/getByApplicationDeadline")
     public DataResult<List<JobAnnouncement>> getByApplicationDeadline(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return this.jobAnnouncementService.getByApplicationDeadlineLessThanEqual(date);

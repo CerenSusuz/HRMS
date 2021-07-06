@@ -3,6 +3,7 @@ package com.hrms.entities.dtos;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hrms.entities.concretes.City;
 import com.hrms.entities.concretes.JobExperience;
 import com.hrms.entities.concretes.JobSeeker;
 import com.hrms.entities.concretes.JobSeekerImage;
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 public class CVDto {
 	@JsonIgnore()
 	private JobSeeker jobSeeker;
+	private List<City> cities;
 	private List<SchoolInfo> schoolInfos;
 	private List<JobExperience> experiences;
 	private List<Language> languages;

@@ -15,6 +15,7 @@ import com.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.core.utilities.results.SuccessResult;
 import com.hrms.dataAccess.abstracts.JobAnnouncementDao;
 import com.hrms.entities.concretes.JobAnnouncement;
+import com.hrms.entities.concretes.JobSeeker;
 
 @Service
 public class JobAnnouncementManager implements JobAnnouncementService{
@@ -39,6 +40,7 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 	@Override
 	public Result add(JobAnnouncement jobAnnouncement) {
 		jobAnnouncement.setReleaseDate(LocalDate.now());
+		jobAnnouncement.setActive(false);
 		 var result = this.jobAnnouncementDao.save(jobAnnouncement);
 		 if (result != null) {
 			 return new SuccessResult("Job Announcement added ok");
@@ -105,6 +107,33 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 		}
 		
 		return new ErrorDataResult<JobAnnouncement>();	
+	}
+
+	@Override
+	public DataResult<JobAnnouncement> getById(int id) {
+		var result = this.jobAnnouncementDao.getById(id);
+		if (result != null) {
+			return new SuccessDataResult<JobAnnouncement>(result,"JobAnnouncement founded");
+		}
+		return new ErrorDataResult<JobAnnouncement>("JobAnnouncement NOT founded");
+	}
+
+	@Override
+	public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndCity_Id(int id) {
+		var result = this.jobAnnouncementDao.getByIsActiveTrueAndCity_Id(id);
+		if (result != null) {
+			return new SuccessDataResult<List<JobAnnouncement>>(result,"OK");
+		}
+		return new ErrorDataResult<List<JobAnnouncement>>("Not ok");
+	}
+
+	@Override
+	public DataResult<List<JobAnnouncement>> getByIsActiveTrueAndDepartment_Id(int id) {
+		var result = this.jobAnnouncementDao.getByIsActiveTrueAndDepartment_Id(id);
+		if (result != null) {
+			return new SuccessDataResult<List<JobAnnouncement>>(result,"OK");
+		}
+		return new ErrorDataResult<List<JobAnnouncement>>("Not ok");
 	}
 
 
