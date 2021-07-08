@@ -15,7 +15,6 @@ import com.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.core.utilities.results.SuccessResult;
 import com.hrms.dataAccess.abstracts.JobAnnouncementDao;
 import com.hrms.entities.concretes.JobAnnouncement;
-import com.hrms.entities.concretes.JobSeeker;
 
 @Service
 public class JobAnnouncementManager implements JobAnnouncementService{

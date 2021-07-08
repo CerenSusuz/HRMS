@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.business.abstracts.CityService;
+import com.hrms.core.utilities.business.BusinessRules;
 import com.hrms.core.utilities.results.DataResult;
 import com.hrms.core.utilities.results.ErrorDataResult;
 import com.hrms.core.utilities.results.ErrorResult;
@@ -37,12 +38,27 @@ public class CityManager implements CityService{
 
 	@Override
 	public Result add(City city) {
-		var result = this.cityDao.save(city);
+		Result result = BusinessRules.run(checkCity(city.getName()));
 		if (result != null) {
-			return new SuccessResult("City added ok");
+			return result;
 		}
-		return new ErrorResult("City added NOT ok");
+		this.cityDao.save(city);
+		return new SuccessResult("City added ok");
 	}
+	
+	//check rules
+	
+	private Result checkCity(String name) {
+		
+		var result = this.cityDao.getByName(name);
+		
+		if (result != null) {
+			return new ErrorResult("city already added");
+		}
+		return new SuccessResult();
+	}
+		
+}
 
 	
-}
+

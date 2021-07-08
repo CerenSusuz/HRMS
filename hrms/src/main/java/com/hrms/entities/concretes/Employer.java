@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -29,6 +30,8 @@ import lombok.NoArgsConstructor;
 public class Employer extends User{
 	
 	@Column(name = "company_name",nullable = false)
+	@NotBlank
+	@NotNull(message="required")
 	private String companyName;
 	
 	@Column(name = "web_address",nullable = false)
@@ -44,6 +47,7 @@ public class Employer extends User{
 	
 	@OneToMany(mappedBy= "employer")
 	private List<JobAnnouncement> jobAnnouncements;
+	
 
 	public Employer(String email,String password, boolean status, String companyName, String webAddress, String phoneNumber) {
 		super(email,password,status);
