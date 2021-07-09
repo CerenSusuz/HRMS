@@ -56,9 +56,9 @@ public class CompanyLogoManager implements CompanyLogoService{
 
 	@Override
 	public DataResult<CompanyLogo> getByEmployerId(int id) {
-		var result =  this.logoDao.getByEmployerId(id);
+		var result =  this.logoDao.getByEmployerUserId(id);
 		if (result != null) {
-			return new SuccessDataResult<CompanyLogo>(this.logoDao.getByEmployerId(id));
+			return new SuccessDataResult<CompanyLogo>(this.logoDao.getByEmployerUserId(id));
 		}
 		return new ErrorDataResult<CompanyLogo>("logo not founded");
 	}

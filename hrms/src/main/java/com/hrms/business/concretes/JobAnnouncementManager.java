@@ -85,7 +85,7 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 
 	@Override
 	public DataResult<List<JobAnnouncement>> getByEmployerId(int id) {
-		var result = this.jobAnnouncementDao.getByEmployerId(id);
+		var result = this.jobAnnouncementDao.getByEmployerUserId(id);
 		if (result != null) {
 			return new SuccessDataResult<List<JobAnnouncement>>(result,"Ok");
 		}
@@ -95,7 +95,7 @@ public class JobAnnouncementManager implements JobAnnouncementService{
 	@Override
 	public DataResult<JobAnnouncement> changeStatus(int employerId,int announcementId, boolean status) {
 		
-		List<JobAnnouncement> announcements = this.jobAnnouncementDao.getByEmployerId(employerId);
+		List<JobAnnouncement> announcements = this.jobAnnouncementDao.getByEmployerUserId(employerId);
 		
 		for (JobAnnouncement jobAnnouncement : announcements) {
 			if (announcementId == jobAnnouncement.getId()) {

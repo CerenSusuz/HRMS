@@ -5,13 +5,13 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hrms.core.entities.concretes.User;
 
@@ -46,8 +46,8 @@ public class Employer extends User{
 	private String phoneNumber;
 	
 	@OneToMany(mappedBy= "employer")
+	@JsonIgnore()
 	private List<JobAnnouncement> jobAnnouncements;
-	
 
 	public Employer(String email,String password, boolean status, String companyName, String webAddress, String phoneNumber) {
 		super(email,password,status);

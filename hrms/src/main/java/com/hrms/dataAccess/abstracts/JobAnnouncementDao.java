@@ -15,7 +15,7 @@ public interface JobAnnouncementDao extends JpaRepository<JobAnnouncement, Integ
 	List<JobAnnouncement> getByApplicationDeadlineLessThanEqual(LocalDate date);
 	List<JobAnnouncement> getByIsActiveTrueAndApplicationDeadlineLessThanEqual(LocalDate date);
 	List<JobAnnouncement> getByIsActiveTrueAndEmployer_CompanyName(String companyName);
-	List<JobAnnouncement> getByEmployerId(int id);
+	List<JobAnnouncement> getByEmployerUserId(int id);
 	List<JobAnnouncement> getByIsActiveTrueAndCity_Id(int id);
 	List<JobAnnouncement> getByIsActiveTrueAndDepartment_Id(int id);
 	JobAnnouncement getById(int id);

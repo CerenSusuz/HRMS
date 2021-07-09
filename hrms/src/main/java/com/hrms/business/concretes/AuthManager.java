@@ -56,7 +56,6 @@ public class AuthManager implements AuthService{
 		var result = BusinessRules.run(
 				 checkDomain(employer),
 				 checkEmailVerification(employer.getEmail()),
-				 checkHrmsConfirm(),
 				 checkIfEmailExists(employer.getEmail()),
 				 checkPasswordSame(employer.getPassword(),employer.getRePassword())
 				);
@@ -65,6 +64,7 @@ public class AuthManager implements AuthService{
 		}
 		
         Employer createEmployer = modelMapper.map(employer,Employer.class);
+        createEmployer.setStatus(false);      
         this.employerService.add(createEmployer);
         return new SuccessResult("Your registration is completed.");
 	}
@@ -84,6 +84,7 @@ public class AuthManager implements AuthService{
 		}
 		
 		JobSeeker creteJobSeeker = modelMapper.map(jobSeeker, JobSeeker.class);
+		creteJobSeeker.setStatus(false);
         this.jobSeekerService.add(creteJobSeeker);
 		return new SuccessResult("Your registration is completed.");
 		
@@ -155,13 +156,6 @@ public class AuthManager implements AuthService{
         }
 		
         return new ErrorResult("Company Email mismatch.");
-	}
-
-	private Result checkHrmsConfirm() {
-		if(this.hrmsService.confirm() == null) {
-			return new ErrorResult("Your registration has not been approved by our institution.");
-		}
-		return new SuccessResult();
 	}
 	
 }

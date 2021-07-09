@@ -7,6 +7,6 @@ import com.hrms.entities.concretes.CompanyLogo;
 
 @Repository
 public interface CompanyLogoDao extends JpaRepository<CompanyLogo, Integer>{
-	CompanyLogo getByEmployerId(int id);
+	CompanyLogo getByEmployerUserId(int id);
 	CompanyLogo getById(int id);
 }
