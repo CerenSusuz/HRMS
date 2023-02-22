@@ -94,8 +94,6 @@ Adaylar sisteme ön yazı ekleyebilmelidir. (Örneğin: Çalışmayı çok sever
 
 -------------------------------------------------
 
-<a href="https://www.youtube.com/watch?v=HB0T0hAMk0k&list=PLqG356ExoxZUuVYKLuiQLnref7Y4ims87">(Java & React) Yazılım Geliştirici Yetiştirme Kampı - Engin Demiroğ</a>
-
 <a href="https://www.btkakademi.gov.tr/portal/course/java-ile-programlamaya-giris-9617#!/about">JAVA İle Programlamaya Giriş</a>
 
 <a href="https://www.btkakademi.gov.tr/portal/course/ileri-seviye-java-9353#!/about">İleri Seviye Java</a>
